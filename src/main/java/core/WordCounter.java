@@ -13,26 +13,37 @@ public class WordCounter {
     }
 
     public Map<String, Integer> countWords(@NotNull final String text) {
-        TextFrequencyStorage textFrequencyStorage = new TextFrequencyStorage();
-        for (String word : getWords(text)) {
-            textFrequencyStorage.addFrequency(word);
-        }
-        return textFrequencyStorage.toMap();
+        return countGroupsOfWords(text, 1);
     }
 
-    public Map<String, Integer> countPairOfWords(@NotNull String text) {
-        TextFrequencyStorage textFrequencyStorage = new TextFrequencyStorage();
-        String[] words = getWords(text);
-        for (int i = 0; i < words.length-1; i++) {
-            String pairOfWords = words[i] + " " + words[i + 1];
-            textFrequencyStorage.addFrequency(pairOfWords);
-        }
-        return textFrequencyStorage.toMap();
+    public Map<String, Integer> countPairsOfWords(@NotNull final String text) {
+        return countGroupsOfWords(text, 2);
+    }
+
+    public Map<String, Integer> countTripletsOfWords(@NotNull final String text) {
+        return countGroupsOfWords(text, 3);
     }
 
     private String[] getWords(String text) {
         return Arrays.stream(text.split(notAlphabet))
                 .filter(s -> !s.isEmpty())
                 .toArray(String[]::new);
+    }
+
+    private Map<String, Integer> countGroupsOfWords(String text, int numberOfWordsPerGroup) {
+        String[] words = getWords(text);
+        TextFrequenciesStorage frequencies = new TextFrequenciesStorage();
+        for (int i = 0; i <= words.length-numberOfWordsPerGroup; i++) {
+            addFrequencyOfTheNextNWords(numberOfWordsPerGroup, i, words, frequencies);
+        }
+        return frequencies.toMap();
+    }
+
+    private void addFrequencyOfTheNextNWords(int n, int startIndex, String[] words, TextFrequenciesStorage frequencies) {
+        String groupOfWords = words[startIndex];
+        for (int j = 1; j < n; j++) {
+            groupOfWords = String.format("%s %s", groupOfWords, words[startIndex + j]);
+        }
+        frequencies.addFrequency(groupOfWords);
     }
 }

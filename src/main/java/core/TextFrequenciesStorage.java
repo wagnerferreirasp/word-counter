@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-class TextFrequencyStorage {
+class TextFrequenciesStorage {
     private final HashMap<String, Integer> textFrequency = new HashMap<>();
 
     public void addFrequency(@NotNull final String text) {

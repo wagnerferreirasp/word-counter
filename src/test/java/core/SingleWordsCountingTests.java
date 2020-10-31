@@ -160,7 +160,7 @@ public class SingleWordsCountingTests {
     public void complex2_ShouldCountCorrectly() {
         String text = "4\n" +
                 "00:00:14,682 --> 00:00:17,226\n" +
-                "Když jste nezadaní a vaši kamarádi se žačnou ženit,\n" +
+                "Když\rjste nezadaní a vaši kamarádi se žačnou ženit,\n" +
                 "\n" +
                 "5\n" +
                 "00:00:17,310 --> 00:00:21,147\n" +
