@@ -9,7 +9,7 @@ You can count ocurrences of single words by using the method WordCounter::countW
 Example:
 
 ```java
-private final String MY_ALPHABET = "\\\\p{Alpha}";
+private final String MY_ALPHABET = "\\p{Alpha}";
 private final WordCounter wordCounter = new WordCounter(MY_ALPHABET);
 
 @Test
@@ -30,7 +30,7 @@ You can also use it to count pairs of neighbour words in the text, by using the 
 Example:
 
 ```java
-private final String MY_ALPHABET = "\\\\p{Alpha}";
+private final String MY_ALPHABET = "\\p{Alpha}";
 private final WordCounter wordCounter = new WordCounter(MY_ALPHABET);
 
 @Test
