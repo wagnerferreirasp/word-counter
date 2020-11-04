@@ -15,19 +15,19 @@ public class TripletOfWordsTests {
     @Test
     void emptyText_ShouldBeEmptyMap() {
         Map<String, Integer> expected = Collections.emptyMap();
-        assertEquals(expected, wordCounter.countTripletsOfWords(""));
+        assertEquals(expected, wordCounter.countGroupsOfWords(3,""));
     }
 
     @Test
     void singleWord_ShouldBeEmptyMap() {
         Map<String, Integer> expected = Collections.emptyMap();
-        assertEquals(expected, wordCounter.countTripletsOfWords("test"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(3,"test"));
     }
 
     @Test
     void pairOfWords_ShouldBeEmptyMap() {
         Map<String, Integer> expected = Collections.emptyMap();
-        assertEquals(expected, wordCounter.countTripletsOfWords("testa testb"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(3,"testa testb"));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TripletOfWordsTests {
         Map<String, Integer> expected = new HashMap<String, Integer>() {{
            put("testa testb testc", 1);
         }};
-        assertEquals(expected, wordCounter.countTripletsOfWords("testa testb testc"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(3,"testa testb testc"));
     }
 
     @Test
@@ -45,6 +45,6 @@ public class TripletOfWordsTests {
             put("testb testc testa", 1);
             put("testc testa testb", 1);
         }};
-        assertEquals(expected, wordCounter.countTripletsOfWords("testa testb testc testa testb testc"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(3,"testa testb testc testa testb testc"));
     }
 }

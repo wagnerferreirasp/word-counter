@@ -1,45 +1,67 @@
 # Word Counter
 
-This is an project that helps you count the occurrences of words in a text.
+This is a project that helps you count the occurrences of words in a text.
 Given an alphabet, it can give you the counting occurrences for each word of the text you want.
 
+This is the core module, so it is fully covered by unit tests and does not deal with 
+IO stuff, like reading files, neither with frameworks. 
+To be able to use its functionality, you can create your application to use this module how you want.
 
-## Single Words
-You can count ocurrences of single words by using the method WordCounter::countWords.
-Example:
+
+# Use cases
+
+## Ranking words
+This use case is about ranking words from a list of texts. You can choose to rank single words, pair of words together, 
+or any group size you want. For example, the following texts would have the following result of ranking:
+
+Texts: 
+```
+"you are good"
+"who you are"
+```
+
+Group size: 
+```
+2 // I want to count pairs of words
+```
+
+Expected result
+```
+"you are": 2 occurrences
+"are good": 1 occurrence
+"who you": 1 occurrence
+```
+
+
+### Configuration
+The class to represent this use case is the `WordRankingUseCase`, with the following constructor:
 
 ```java
-private final String MY_ALPHABET = "\\p{Alpha}";
-private final WordCounter wordCounter = new WordCounter(MY_ALPHABET);
+public WordRankingUseCase(String alphabet, TextProvider textProvider)
+```
 
-@Test
-public void complexPhraseWithSpecialSymbols_ShouldIgnoreThem() {
-    Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
-        put("teste", 2);
-        put("testf", 1);
-        put("testg", 1);
-        put("ASD", 1);
-        put("ASDe", 1);
-    }};
-    assertEquals(expectedResult, wordCounter.countWords("   teste\r\n ->...[].(ASD)_ASDe  testf  \nteste  testg "));
+Where the
+ - `alphabet` is the regex representation of the characters of the alphabet that you want to consider when counting words
+ - `textProvider` is the way you are going to provide the texts as input, by implementing its interface TextProvider:
+ 
+```java
+public interface TextProvider {
+    List<Text> findAll();
 }
 ```
 
-## Pair of Words
-You can also use it to count pairs of neighbour words in the text, by using the method WordCounter::countPairOfWords. 
-Example:
+### Usage
+To rank words in the provided texts, you can call the following method from the `WordRankingUseCase` class:
+```java
+public LinkedHashMap<String, Integer> rankWordsFromTexts(int groupSize);
+```
+
+You can choose how many words you want to group by passing the `groupSize`.
+This function will return a LinkedHashMap already sorted in descending order of ocurrences of the group of words.
+
+So for example, if you want to rank pairs of words in a text, you can call:
 
 ```java
-private final String MY_ALPHABET = "\\p{Alpha}";
-private final WordCounter wordCounter = new WordCounter(MY_ALPHABET);
-
-@Test
-public void doubleYouAreWithSpecialChars_ShouldReturnOneDoubleOfIt() {
-    Map<String, Integer> expected = new HashMap<String, Integer>() {{
-        put("you are", 2);
-        put("are beautiful", 1);
-        put("beautiful you", 1);
-    }};
-    assertEquals(expected, wordCounter.countPairOfWords("-you are, beautiful, \"you are\""));
-}
+LinkedHashMap<String, Integer> result = wordRankingUseCase.rankWordsFromTexts(2);
 ```
+ 

@@ -15,7 +15,7 @@ public class SingleWordsCountingTests {
     @Test
     public void emptyText_ShouldBeEmptyMap() {
         Map<String, Integer> expectedResult = new HashMap<>();
-        assertEquals(expectedResult, wordCounter.countWords(""));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,""));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
            put("test", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("test"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"test"));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("test,"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"test,"));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("_test"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"_test"));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("-test"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"-test"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 2);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("test test"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"test test"));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 2);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("test  test"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"test  test"));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("test", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords(" test "));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1," test "));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class SingleWordsCountingTests {
             put("teste", 1);
             put("testf", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("teste testf"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"teste testf"));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class SingleWordsCountingTests {
             put("testf", 1);
             put("testg", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("teste testf testg"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"teste testf testg"));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class SingleWordsCountingTests {
             put("teste", 1);
             put("testf", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("teste\ntestf"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"teste\ntestf"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class SingleWordsCountingTests {
             put("teste", 1);
             put("testf", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("teste\r\ntestf"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"teste\r\ntestf"));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class SingleWordsCountingTests {
         Map<String, Integer> expectedResult = new HashMap<String, Integer>() {{
             put("Příští", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("Příští"));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"Příští"));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class SingleWordsCountingTests {
             put("ASD", 1);
             put("ASDe", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords("   teste\r\n ->...[].(ASD)_ASDe  testf  \nteste  testg "));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,"   teste\r\n ->...[].(ASD)_ASDe  testf  \nteste  testg "));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class SingleWordsCountingTests {
             put("hledal", 1);
             put("než", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords(text));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,text));
     }
 
     @Test
@@ -242,6 +242,6 @@ public class SingleWordsCountingTests {
             put("sem", 1);
             put("optimista", 1);
         }};
-        assertEquals(expectedResult, wordCounter.countWords(text));
+        assertEquals(expectedResult, wordCounter.countGroupsOfWords(1,text));
     }
 }

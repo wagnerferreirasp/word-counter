@@ -15,13 +15,13 @@ public class PairOfWordsCountingTests {
     @Test
     public void emptyString_ShouldReturnEmptyMap() {
         Map<String, Integer> expected = new HashMap<>();
-        assertEquals(expected, wordCounter.countPairsOfWords(""));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,""));
     }
 
     @Test
     public void wordAlone_ShouldReturnEmptyMap() {
         Map<String, Integer> expected = new HashMap<>();
-        assertEquals(expected, wordCounter.countPairsOfWords("one"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"one"));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class PairOfWordsCountingTests {
         Map<String, Integer> expected = new HashMap<String, Integer>() {{
             put("one two", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords("one two"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"one two"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class PairOfWordsCountingTests {
             put("you are", 1);
             put("are beautiful", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords("you are beautiful"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful"));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class PairOfWordsCountingTests {
             put("are beautiful", 1);
             put("beautiful are", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords("you are beautiful are"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful are"));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class PairOfWordsCountingTests {
             put("are beautiful", 1);
             put("beautiful you", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords("you are beautiful you are"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful you are"));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class PairOfWordsCountingTests {
             put("are beautiful", 1);
             put("beautiful you", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords("-you are, beautiful, \"you are\""));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,"-you are, beautiful, \"you are\""));
     }
 
     @Test
@@ -107,6 +107,6 @@ public class PairOfWordsCountingTests {
             put("nás z", 1);
             put("z práce", 1);
         }};
-        assertEquals(expected, wordCounter.countPairsOfWords(text));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2,text));
     }
 }
