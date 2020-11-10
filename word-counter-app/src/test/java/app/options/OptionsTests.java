@@ -16,7 +16,7 @@ public class OptionsTests {
 	public final String GROUP_SIZE_OPTION = "--group-size";
 	public final String ALPHABET_OPTION = "--alphabet";
 
-	public static final String PATH_VALID_VALUE = "input1.txt";
+	public static final String PATH_VALID_VALUE = "validInput.txt";
 	public static final Integer GROUP_SIZE_VALID_VALUE = 1;
 	public static final String ALPHABET_VALID_VALUE = "\\p{Alpha}";
 
