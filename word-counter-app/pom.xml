@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>word-counter-app</artifactId>
-    <groupId>org.example</groupId>
+    <groupId>org.example.wordcounter</groupId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -28,23 +28,10 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.10.19</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>2.3.3.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>word-counter-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -63,6 +50,12 @@
             <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.example.wordcounter</groupId>
+            <artifactId>word-counter-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
