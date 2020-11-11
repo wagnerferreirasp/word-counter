@@ -2,7 +2,7 @@ package app.options;
 
 import org.junit.jupiter.api.Test;
 
-public class GroupSizeTests extends OptionsTests {
+public class GroupSizeTests extends OptionsBaseTests {
 
     @Test
     void groupSizeNotPassed_ShouldThrowInvalidOption() {

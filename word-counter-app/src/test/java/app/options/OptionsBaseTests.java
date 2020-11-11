@@ -1,42 +1,26 @@
 package app.options;
 
 import app.options.exception.InvalidOptionException;
-import app.options.parser.OptionsParser;
-import org.junit.jupiter.api.Test;
+import app.options.parsers.OptionsParser;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class OptionsTests {
+public class OptionsBaseTests {
 	public static final String PATH_OPTION = "--path";
+	public static final String ENCODING_OPTION = "--encoding";
 	public final String GROUP_SIZE_OPTION = "--group-size";
 	public final String ALPHABET_OPTION = "--alphabet";
+	public static final String INVALID_OPTION = "--invalid-option";
 
 	public static final String PATH_VALID_VALUE = "validInput.txt";
 	public static final Integer GROUP_SIZE_VALID_VALUE = 1;
 	public static final String ALPHABET_VALID_VALUE = "\\p{Alpha}";
+	public static final String INVALID_OPTION_VALUE = "value";
 
-	@Test
-	void notPassingAnyArgs_ShouldThrowException() {
-		String[] args = {};
-
-		assertInvalidOptionIsThrown(args);
-	}
-
-	@Test
-	void passValidOptions_ShouldParseCorrectly() {
-		String[] args = fromMap(getValidOpts());
-
-		Options options = OptionsParser.parse(args);
-
-		assertEquals(GROUP_SIZE_VALID_VALUE, options.groupSize);
-		assertEquals(ALPHABET_VALID_VALUE, options.alphabet);
-		assertEquals(PATH_VALID_VALUE, options.path.getName());
-	}
 
 	protected void assertInvalidOptionIsThrown(String[] args) {
 		assertThrows(InvalidOptionException.class, () -> {

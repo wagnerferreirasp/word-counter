@@ -1,4 +1,4 @@
-package app.options.parser;
+package app.options.parsers;
 
 import app.options.Options;
 import app.options.exception.InvalidOptionException;
