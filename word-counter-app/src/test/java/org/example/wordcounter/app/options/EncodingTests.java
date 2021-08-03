@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import static org.example.wordcounter.app.Constants.ENCODING_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EncodingTests extends OptionsBaseTests {

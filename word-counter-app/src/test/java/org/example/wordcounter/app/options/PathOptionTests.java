@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static org.example.wordcounter.app.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PathOptionTests extends OptionsBaseTests {

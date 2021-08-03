@@ -1,14 +1,12 @@
 package org.example.wordcounter.core.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Map;
 
 public class WordCounter {
     private final String notAlphabet;
 
-    public WordCounter(@NotNull final String alphabet) {
+    public WordCounter(final String alphabet) {
         this.notAlphabet = "[^" + alphabet + "]";
     }
 

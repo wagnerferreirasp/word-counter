@@ -2,8 +2,6 @@ package org.example.wordcounter.app.boundaries;
 
 import org.example.wordcounter.core.boundaries.Text;
 import org.example.wordcounter.core.boundaries.TextProvider;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,13 +25,11 @@ public class FileTextProvider implements TextProvider {
 		if (!path.isDirectory()) {
 			return Collections.singletonList(getTextFromFile(path));
 		}
-
 		return Arrays.stream(path.listFiles())
 				.map(this::getTextFromFile)
 				.collect(Collectors.toList());
 	}
 
-	@NotNull
 	private Text getTextFromFile(File file) {
 		try {
 			return new InputStreamText(new FileInputStream(file), encoding);

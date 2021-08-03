@@ -1,10 +1,9 @@
 package org.example.wordcounter.app;
 
-import org.example.wordcounter.app.boundaries.InputStreamText;
 import org.example.wordcounter.core.boundaries.Text;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
+import static org.example.wordcounter.app.FileUtils.getText;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -65,8 +64,4 @@ public class InputStreamTextTests {
 		return getText("texts/utf8/complex.txt", StandardCharsets.UTF_8);
 	}
 
-	private Text getText(String fileName, Charset encoding) {
-		InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
-		return new InputStreamText(is, encoding);
-	}
 }

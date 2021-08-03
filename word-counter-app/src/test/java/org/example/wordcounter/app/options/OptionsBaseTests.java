@@ -4,20 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static org.example.wordcounter.app.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OptionsBaseTests {
-	public static final String PATH_OPTION = "--path";
-	public static final String ENCODING_OPTION = "--encoding";
-	public final String GROUP_SIZE_OPTION = "--group-size";
-	public final String ALPHABET_OPTION = "--alphabet";
-	public static final String INVALID_OPTION = "--invalid-option";
-
+	private static final String OUTPUT_VALID_VALUE = "validOutput.txt";
 	public static final String PATH_VALID_VALUE = "validInput.txt";
 	public static final Integer GROUP_SIZE_VALID_VALUE = 1;
 	public static final String ALPHABET_VALID_VALUE = "\\p{Alpha}";
-	public static final String INVALID_OPTION_VALUE = "value";
-
+	public static final String BASE64_ALPHABET_VALID_VALUE = "XHB7QWxwaGF9";
+	public static final String INVALID_OPTION = "--invalid-option";
+	public static final String INVALID_OPTION_VALUE = "invalid-option-value";
 
 	protected void assertInvalidOptionIsThrown(String[] args) {
 		assertThrows(InvalidOptionException.class, () -> {
@@ -40,8 +37,9 @@ public class OptionsBaseTests {
 	protected Map<String, String> getValidOpts() {
 		return new HashMap<String, String>(){{
 			put(GROUP_SIZE_OPTION, GROUP_SIZE_VALID_VALUE.toString());
-			put(ALPHABET_OPTION, ALPHABET_VALID_VALUE);
+			put(ALPHABET_OPTION, BASE64_ALPHABET_VALID_VALUE);
 			put(PATH_OPTION, PATH_VALID_VALUE);
+			put(OUTPUT_OPTION, OUTPUT_VALID_VALUE);
 		}};
 	}
 

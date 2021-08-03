@@ -4,7 +4,6 @@ import org.example.wordcounter.app.boundaries.FileTextProvider;
 import org.example.wordcounter.app.boundaries.PathNotFoundException;
 import org.example.wordcounter.core.boundaries.Text;
 import org.example.wordcounter.core.boundaries.TextProvider;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -55,24 +54,19 @@ public class FileTextProviderTests {
 		assertEquals(expectedContents, actualContents);
 	}
 
-	@NotNull
 	private File givenFileThatDoesntExist() {
 		return new File("texts/DOES_NOT_EXIST.txt");
 	}
 
-	@NotNull
 	private File givenSimpleFile() {
 		return givenPath("texts/utf8/simple.txt");
 	}
 
-	@NotNull
 	private File givenSimpleFolder() {
 		return givenPath("texts/utf8");
 	}
 
-	@NotNull
 	private File givenPath(String name) {
-		return new File(getClass().getClassLoader().getResource(name).getPath());
+		return new File(FileUtils.getResourcePath(name));
 	}
-
 }

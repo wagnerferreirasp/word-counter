@@ -1,6 +1,7 @@
 package org.example.wordcounter.app.options;
 
 import org.junit.jupiter.api.Test;
+import static org.example.wordcounter.app.Constants.GROUP_SIZE_OPTION;
 
 public class GroupSizeTests extends OptionsBaseTests {
 

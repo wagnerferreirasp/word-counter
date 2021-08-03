@@ -2,7 +2,6 @@ package org.example.wordcounter.app.options;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
-import org.jetbrains.annotations.NotNull;
 
 public class OptionsParser {
 	public static Options parse(String[] argv) {
@@ -13,13 +12,16 @@ public class OptionsParser {
 		}
 	}
 
-	@NotNull
 	private static Options tryToParseOptions(String[] argv) {
 		Options options = new Options();
-		JCommander.newBuilder()
+		JCommander jCommander = JCommander.newBuilder()
 				.addObject(options)
-				.build()
-				.parse(argv);
+				.programName("word-counter-app")
+				.build();
+		jCommander.parse(argv);
+		if (options.isHelp()) {
+			jCommander.usage();
+		}
 		return options;
 	}
 }

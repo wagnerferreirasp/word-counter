@@ -1,14 +1,12 @@
 package org.example.wordcounter.core.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
 class TextFrequenciesStorage {
     private final HashMap<String, Integer> textFrequency = new HashMap<>();
 
-    public void addFrequency(@NotNull final String text) {
+    public void addFrequency(final String text) {
         if (textDoesNotExist(text)) {
             initializeFrequency(text);
         }

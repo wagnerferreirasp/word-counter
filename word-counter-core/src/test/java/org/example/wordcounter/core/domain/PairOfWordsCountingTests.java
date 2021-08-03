@@ -3,8 +3,10 @@ package org.example.wordcounter.core.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.example.wordcounter.core.domain.Constants.CZECH_ALPHABET;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +18,15 @@ public class PairOfWordsCountingTests {
     public void emptyString_ShouldReturnEmptyMap() {
         Map<String, Integer> expected = new HashMap<>();
         assertEquals(expected, wordCounter.countGroupsOfWords(2,""));
+
+        ArrayList<Optional<String>> optionals = new ArrayList<>();
+        optionals.add(Optional.empty());
+        optionals.add(Optional.of(""));
+
+        optionals.stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .forEach(System.out::println);
     }
 
     @Test
