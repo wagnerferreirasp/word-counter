@@ -1,4 +1,4 @@
-package org.example.wordcounter.app.options;
+package org.example.wordcounter.app.options.jcommander;
 
 import com.beust.jcommander.ParameterException;
 import com.beust.jcommander.converters.BaseConverter;

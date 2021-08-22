@@ -23,7 +23,7 @@ public class OptionsCommonTests extends OptionsBaseTests {
 	void passValidOptions_ShouldParseCorrectly() {
 		String[] args = fromMap(getValidOpts());
 
-		Options options = OptionsParser.parse(args);
+		Options options = optionsParser.parse(args);
 
 		assertEquals(GROUP_SIZE_VALID_VALUE, options.getGroupSize());
 		assertEquals(ALPHABET_VALID_VALUE, options.getAlphabet());

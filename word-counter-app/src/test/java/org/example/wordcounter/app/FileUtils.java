@@ -15,4 +15,10 @@ public class FileUtils {
 		InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
 		return new InputStreamText(is, encoding);
 	}
+
+	public static Text getText(String fileName, String exclusionsFileName, Charset encoding) {
+		InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(fileName);
+		InputStream streamExclusions = FileUtils.class.getClassLoader().getResourceAsStream(exclusionsFileName);
+		return new InputStreamText(is, streamExclusions, encoding);
+	}
 }

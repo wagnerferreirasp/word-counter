@@ -1,5 +1,8 @@
 package org.example.wordcounter.app.options;
 
+import org.example.wordcounter.app.Application;
+import org.example.wordcounter.app.ApplicationConfig;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -16,10 +19,10 @@ public class OptionsBaseTests {
 	public static final String INVALID_OPTION = "--invalid-option";
 	public static final String INVALID_OPTION_VALUE = "invalid-option-value";
 
+	protected OptionsParser optionsParser = ApplicationConfig.getOptionsParser(new Options());
+
 	protected void assertInvalidOptionIsThrown(String[] args) {
-		assertThrows(InvalidOptionException.class, () -> {
-			OptionsParser.parse(args);
-		});
+		assertThrows(InvalidOptionException.class, () -> optionsParser.parse(args));
 	}
 
 	protected String[] givenValidOptionsWith(String option, String value) {

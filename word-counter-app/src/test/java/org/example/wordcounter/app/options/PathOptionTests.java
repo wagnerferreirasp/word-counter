@@ -19,7 +19,7 @@ public class PathOptionTests extends OptionsBaseTests {
 	void passSingleFile_ShouldParseCorrectly() {
 		String[] args = givenValidOptionsWith(PATH_OPTION, "texts/utf8/simple.txt");
 
-		Options options = OptionsParser.parse(args);
+		Options options = optionsParser.parse(args);
 
 		assertEquals(new File("texts/utf8/simple.txt"), options.getPath());
 	}
@@ -28,7 +28,7 @@ public class PathOptionTests extends OptionsBaseTests {
 	void passFolder_ShouldParseCorrectly() {
 		String[] args = givenValidOptionsWith(PATH_OPTION, "texts/");
 
-		Options options = OptionsParser.parse(args);
+		Options options = optionsParser.parse(args);
 
 		assertEquals(new File("texts/"), options.getPath());
 	}

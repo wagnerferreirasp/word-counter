@@ -1,6 +1,9 @@
 package org.example.wordcounter.app.options;
 
 import com.beust.jcommander.Parameter;
+import org.example.wordcounter.app.options.jcommander.AlphabetStringConverter;
+import org.example.wordcounter.app.options.jcommander.CharsetStringConverter;
+import org.example.wordcounter.app.options.jcommander.PositiveIntValidator;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -27,13 +30,18 @@ public class Options {
     )
     private File path;
 
+    @Parameter(description = "Exclusions - file with lines to exclude from processing",
+            names = {EXCLUSIONS_OPTION}, required = false
+    )
+    private File exclusions;
+
     @Parameter(description = "Encoding - encoding to consider when reading files from --path",
             names = {ENCODING_OPTION}, converter = CharsetStringConverter.class
     )
     private Charset encoding = StandardCharsets.UTF_8;
 
     @Parameter(description = "Output file",
-            names = {OUTPUT_OPTION}, required = false
+            names = {OUTPUT_OPTION}, required = true
     )
     private File output;
 
@@ -62,5 +70,9 @@ public class Options {
 
     public boolean isHelp() {
         return help;
+    }
+
+    public File getExclusions() {
+        return exclusions;
     }
 }

@@ -13,10 +13,18 @@ import java.util.stream.Collectors;
 
 public class FileTextProvider implements TextProvider {
 	private final File path;
+	private File exclusionsFile;
 	private final Charset encoding;
+
 
 	public FileTextProvider(File path, Charset encoding) {
 		this.path = path;
+		this.encoding = encoding;
+	}
+
+	public FileTextProvider(File path, File exclusionsFile, Charset encoding) {
+		this.path = path;
+		this.exclusionsFile = exclusionsFile;
 		this.encoding = encoding;
 	}
 
@@ -32,7 +40,9 @@ public class FileTextProvider implements TextProvider {
 
 	private Text getTextFromFile(File file) {
 		try {
-			return new InputStreamText(new FileInputStream(file), encoding);
+			return exclusionsFile == null ?
+					new InputStreamText(new FileInputStream(file), encoding)
+					: new InputStreamText(new FileInputStream(file), new FileInputStream(exclusionsFile), encoding);
 		} catch (FileNotFoundException e) {
 			throw new PathNotFoundException(e);
 		}
