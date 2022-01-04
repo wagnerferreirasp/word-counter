@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            execute(args);
+            Main.execute(args);
         } catch (ConfigurationException e) {
             System.err.println(e.getMessage());
         }
