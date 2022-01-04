@@ -7,7 +7,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
-public class RankingLowerCaseTests extends WordRankingUseCaseTest {
+public class RankingLowerCaseTests extends WordRankingServiceTest {
     @Test
     void singleSimpleTextWithUpperCase_ShouldLowerTheCase() {
         givenTextsWithSameContent(1,"Are You OK?");

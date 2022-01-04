@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 
-public class RankingGroupSizeTests extends WordRankingUseCaseTest {
+public class RankingGroupSizeTests extends WordRankingServiceTest {
     @Test
     void singleEmptyText_ShouldBeEmptyMap() {
         givenTextsWithSameContent(1,"");

@@ -7,7 +7,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class RankingSumTests extends WordRankingUseCaseTest {
+public class RankingSumTests extends WordRankingServiceTest {
     @Test
     void twoSimpleTextWithSameText_ShouldCountInDouble() {
         givenTextsWithSameContent(2, "are you you");
