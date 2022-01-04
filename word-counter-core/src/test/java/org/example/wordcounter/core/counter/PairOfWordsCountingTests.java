@@ -14,61 +14,75 @@ public class PairOfWordsCountingTests {
 
     @Test
     public void emptyString_ShouldReturnEmptyMap() {
+        String inputText = "";
+
         Map<String, Integer> expected = new HashMap<>();
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,""));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void wordAlone_ShouldReturnEmptyMap() {
+        String inputText = "one";
+
         Map<String, Integer> expected = new HashMap<>();
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"one"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void pairOfWords_ShouldReturnThemOnce() {
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        String inputText = "one two";
+
+        Map<String, Integer> expected = new HashMap<>() {{
             put("one two", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"one two"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void threeWords_ShouldReturnPairsOfNeighboursOnce() {
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        String inputText = "you are beautiful";
+
+        Map<String, Integer> expected = new HashMap<>() {{
             put("you are", 1);
             put("are beautiful", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void fourWords_ShouldReturnPairsOfNeighboursOnce() {
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        String inputText = "you are beautiful are";
+
+        Map<String, Integer> expected = new HashMap<>() {{
             put("you are", 1);
             put("are beautiful", 1);
             put("beautiful are", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful are"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void doubleYouAre_ShouldReturnOneDoubleOfIt() {
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        String inputText = "you are beautiful you are";
+
+        Map<String, Integer> expected = new HashMap<>() {{
             put("you are", 2);
             put("are beautiful", 1);
             put("beautiful you", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"you are beautiful you are"));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
     public void doubleYouAreWithSpecialChars_ShouldReturnOneDoubleOfIt() {
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        String inputText = "-you are, beautiful, \"you are\"";
+
+        Map<String, Integer> expected = new HashMap<>() {{
             put("you are", 2);
             put("are beautiful", 1);
             put("beautiful you", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,"-you are, beautiful, \"you are\""));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, inputText));
     }
 
     @Test
@@ -87,7 +101,7 @@ public class PairOfWordsCountingTests {
                 "O nic nejde.\n" +
                 "Je to jen kluk od nás z práce.\n";
 
-        Map<String, Integer> expected = new HashMap<String, Integer>() {{
+        Map<String, Integer> expected = new HashMap<>() {{
             put("Zrušená svatba", 1);
             put("svatba Czech", 1);
             put("Czech Subtitles", 1);
@@ -107,6 +121,6 @@ public class PairOfWordsCountingTests {
             put("nás z", 1);
             put("z práce", 1);
         }};
-        assertEquals(expected, wordCounter.countGroupsOfWords(2,text));
+        assertEquals(expected, wordCounter.countGroupsOfWords(2, text));
     }
 }
