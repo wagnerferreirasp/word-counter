@@ -3,18 +3,29 @@ package org.example.wordcounter.app;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
-import static org.example.wordcounter.app.FileUtils.getText;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import static org.example.wordcounter.app.FileUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InputStreamTextTests {
+public class FileTextTests {
 
 	public static final String CONTENT_OF_SIMPLE_TXT = "simpleContent";
 	public static final String CONTENT_OF_CP1250_TXT = "příští zaměstnanec";
 	public static final String CONTENT_OF_COMPLEX_TXT = "complexContent\ncomplexContent\ncomplexContent\ncomplexContent";
 	public static final String CONTENT_OF_EMPTY_TXT = "";
+
+
+	@Test
+	void nonexistentFile_ShouldThrowException() {
+		Text text = givenFileThatDoesntExist();
+		assertThrows(UncheckedIOException.class,
+			text::getContent
+		);
+	}
 
 	@Test
 	void emptyFile_ShouldReturnEmptyContent() {
@@ -62,6 +73,10 @@ public class InputStreamTextTests {
 
 	public Text givenComplexFile() {
 		return getText("texts/utf8/complex.txt", StandardCharsets.UTF_8);
+	}
+
+	public Text givenFileThatDoesntExist() {
+		return getText("nonexistent", StandardCharsets.UTF_8);
 	}
 
 }

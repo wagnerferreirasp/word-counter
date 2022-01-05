@@ -4,6 +4,7 @@ import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.files.CsvWriter;
 import org.example.wordcounter.core.counter.WordRankingService;
 
+import java.io.UncheckedIOException;
 import java.util.LinkedHashMap;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Main.execute(args);
-        } catch (ConfigurationException e) {
+        } catch (ConfigurationException | UncheckedIOException e) {
             System.err.println(e.getMessage());
         }
     }

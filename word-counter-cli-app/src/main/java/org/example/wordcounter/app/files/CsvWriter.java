@@ -1,31 +1,43 @@
 package org.example.wordcounter.app.files;
 
-import lombok.SneakyThrows;
-
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
-import java.util.function.BiConsumer;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+/**
+ * Utility class to write the ranking of words to a csv file
+ */
 public class CsvWriter {
 
+    /**
+     * Writes the ranking to the outputPath
+     * @param ranking the map with the ranking of words
+     * @param outputPath the output path to save the csv file
+     * @param encoding the encoding to save the csv file
+     */
     public static void writeRankingToCsv(LinkedHashMap<String, Integer> ranking, File outputPath, Charset encoding) {
-        StringBuilder stringBuilder = new StringBuilder();
-        ranking.forEach(writeCsvLine(stringBuilder));
-        String content = stringBuilder.toString();
-        sneakyWriteContent(outputPath, encoding, content);
+        String content = ranking.entrySet().stream()
+            .map(CsvWriter::toLine)
+            .collect(Collectors.joining("\n"));
+        writeToCsv(outputPath, encoding, content);
     }
 
-    private static BiConsumer<String, Integer> writeCsvLine(StringBuilder sb) {
-        return (word, freq) ->
-            sb.append(String.format("%s,%d\n", word, freq));
+    private static String toLine(Map.Entry<String, Integer> rankingEntry) {
+        String word = rankingEntry.getKey();
+        Integer rank = rankingEntry.getValue();
+        return String.format("%s,%d", word, rank);
     }
 
-    @SneakyThrows
-    private static void sneakyWriteContent(File outputPath, Charset encoding, String content) {
+    private static void writeToCsv(File outputPath, Charset encoding, String content) {
         try (FileOutputStream outputStream = new FileOutputStream(outputPath)) {
             outputStream.write(content.getBytes(encoding));
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
     }
 

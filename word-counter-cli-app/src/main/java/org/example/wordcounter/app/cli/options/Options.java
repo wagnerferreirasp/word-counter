@@ -14,8 +14,11 @@ import static org.example.wordcounter.app.cli.options.Constants.ALPHABET_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.ENCODING_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.OUTPUT_PATH_OPTION;
-import static org.example.wordcounter.app.cli.options.Constants.PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
 
+/**
+ * Represents the options passed via cli to run the application
+ */
 @Getter
 public class Options {
     @Parameter(names = "--help", help = true)
@@ -31,10 +34,10 @@ public class Options {
     )
     private String alphabet;
 
-    @Parameter(description = "Path - file or directory to count the words",
-        names = {PATH_OPTION}, required = true
+    @Parameter(description = "Input Path - file or directory to count the words",
+        names = {INPUT_PATH_OPTION}, required = true
     )
-    private File path;
+    private File inputPath;
 
     @Parameter(description = "Encoding - encoding to consider when reading files from --path",
         names = {ENCODING_OPTION}, converter = CharsetStringConverter.class

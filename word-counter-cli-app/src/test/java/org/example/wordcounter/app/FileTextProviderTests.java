@@ -1,22 +1,20 @@
 package org.example.wordcounter.app;
 
 import org.example.wordcounter.app.files.FileTextProvider;
-import org.example.wordcounter.app.files.PathNotFoundException;
 import org.example.wordcounter.core.text.Text;
 import org.example.wordcounter.core.text.TextProvider;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.example.wordcounter.app.InputStreamTextTests.CONTENT_OF_COMPLEX_TXT;
-import static org.example.wordcounter.app.InputStreamTextTests.CONTENT_OF_EMPTY_TXT;
-import static org.example.wordcounter.app.InputStreamTextTests.CONTENT_OF_SIMPLE_TXT;
+import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_COMPLEX_TXT;
+import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_EMPTY_TXT;
+import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_SIMPLE_TXT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,9 +22,9 @@ public class FileTextProviderTests {
 
 	@Test
 	void fileDoesNotExist_ShouldThrowException() {
-		TextProvider textProvider = new FileTextProvider(givenFileThatDoesntExist(), StandardCharsets.UTF_8);
-
-		assertThrows(PathNotFoundException.class, textProvider::findAll);
+		assertThrows(UncheckedIOException.class,
+			() -> new FileTextProvider(givenFileThatDoesntExist(), StandardCharsets.UTF_8)
+		);
 	}
 
 	@Test
@@ -43,13 +41,13 @@ public class FileTextProviderTests {
 	void simpleFolder_ShouldLoadCorrectly() {
 		TextProvider textProvider = new FileTextProvider(givenSimpleFolder(), StandardCharsets.UTF_8);
 
-		Set<String> actualContents = textProvider.findAll()
+		List<String> actualContents = textProvider.findAll()
 				.stream()
 				.map(Text::getContent)
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 
-		Set<String> expectedContents = new HashSet<>(
-			Arrays.asList(CONTENT_OF_SIMPLE_TXT, CONTENT_OF_EMPTY_TXT, CONTENT_OF_COMPLEX_TXT)
+		List<String> expectedContents = Arrays.asList(
+			CONTENT_OF_COMPLEX_TXT, CONTENT_OF_EMPTY_TXT, CONTENT_OF_SIMPLE_TXT
 		);
 
 		assertEquals(3, actualContents.size());
@@ -69,6 +67,6 @@ public class FileTextProviderTests {
 	}
 
 	private File givenPath(String name) {
-		return new File(FileUtils.getResourcePath(name));
+		return new File(FileUtils.getFullPath(name));
 	}
 }

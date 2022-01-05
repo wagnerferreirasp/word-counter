@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import static org.example.wordcounter.app.cli.options.Constants.ALPHABET_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.OUTPUT_PATH_OPTION;
-import static org.example.wordcounter.app.cli.options.Constants.PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OptionsBaseTests {
@@ -43,7 +43,7 @@ public class OptionsBaseTests {
 		return new HashMap<String, String>(){{
 			put(GROUP_SIZE_OPTION, GROUP_SIZE_VALID_VALUE.toString());
 			put(ALPHABET_OPTION, BASE64_ALPHABET_VALID_VALUE);
-			put(PATH_OPTION, PATH_VALID_VALUE);
+			put(INPUT_PATH_OPTION, PATH_VALID_VALUE);
 			put(OUTPUT_PATH_OPTION, OUTPUT_VALID_VALUE);
 		}};
 	}

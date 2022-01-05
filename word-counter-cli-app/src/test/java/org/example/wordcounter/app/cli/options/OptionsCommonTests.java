@@ -27,6 +27,6 @@ public class OptionsCommonTests extends OptionsBaseTests {
 
 		assertEquals(GROUP_SIZE_VALID_VALUE, options.getGroupSize());
 		assertEquals(ALPHABET_VALID_VALUE, options.getAlphabet());
-		assertEquals(PATH_VALID_VALUE, options.getPath().getName());
+		assertEquals(PATH_VALID_VALUE, options.getInputPath().getName());
 	}
 }
