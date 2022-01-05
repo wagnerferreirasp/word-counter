@@ -1,6 +1,7 @@
 package org.example.wordcounter.app.cli.options;
 
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
+import org.example.wordcounter.app.files.FileTestUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,10 +41,10 @@ public class OptionsBaseTests {
 	}
 
 	protected Map<String, String> getValidOpts() {
-		return new HashMap<String, String>(){{
+		return new HashMap<>() {{
 			put(GROUP_SIZE_OPTION, GROUP_SIZE_VALID_VALUE.toString());
 			put(ALPHABET_OPTION, BASE64_ALPHABET_VALID_VALUE);
-			put(INPUT_PATH_OPTION, PATH_VALID_VALUE);
+			put(INPUT_PATH_OPTION, FileTestUtils.getFullPath(PATH_VALID_VALUE));
 			put(OUTPUT_PATH_OPTION, OUTPUT_VALID_VALUE);
 		}};
 	}

@@ -4,6 +4,7 @@ import com.beust.jcommander.Parameter;
 import lombok.Getter;
 import org.example.wordcounter.app.cli.options.impl.AlphabetStringConverter;
 import org.example.wordcounter.app.cli.options.impl.CharsetStringConverter;
+import org.example.wordcounter.app.cli.options.impl.FileExistsValidator;
 import org.example.wordcounter.app.cli.options.impl.PositiveIntValidator;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class Options {
     private String alphabet;
 
     @Parameter(description = "Input Path - file or directory to count the words",
-        names = {INPUT_PATH_OPTION}, required = true
+        names = {INPUT_PATH_OPTION}, required = true, validateValueWith = FileExistsValidator.class
     )
     private File inputPath;
 

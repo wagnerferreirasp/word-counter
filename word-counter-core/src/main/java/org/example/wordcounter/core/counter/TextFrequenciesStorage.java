@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class TextFrequenciesStorage {
+
     private final HashMap<String, Integer> textFrequency = new HashMap<>();
 
     public void addFrequency(final String text) {
@@ -29,5 +30,6 @@ class TextFrequenciesStorage {
         int quantity = textFrequency.get(text);
         textFrequency.put(text, quantity + 1);
     }
+
 }
 

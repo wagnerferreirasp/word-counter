@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Utility functions for maps
+ */
 public class MapUtils {
     public static LinkedHashMap<String, Integer> sortedMapByValue(Map<String, Integer> map) {
         LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
