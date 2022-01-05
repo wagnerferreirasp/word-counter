@@ -1,4 +1,4 @@
-package org.example.wordcounter.app;
+package org.example.wordcounter.app.files;
 
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import static org.example.wordcounter.app.FileUtils.getText;
+import static org.example.wordcounter.app.files.FileUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

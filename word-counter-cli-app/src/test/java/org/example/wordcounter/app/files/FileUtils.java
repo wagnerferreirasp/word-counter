@@ -1,6 +1,5 @@
-package org.example.wordcounter.app;
+package org.example.wordcounter.app.files;
 
-import org.example.wordcounter.app.files.FileText;
 import org.example.wordcounter.core.text.Text;
 
 import java.io.File;

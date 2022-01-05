@@ -1,6 +1,5 @@
-package org.example.wordcounter.app;
+package org.example.wordcounter.app.files;
 
-import org.example.wordcounter.app.files.FileTextProvider;
 import org.example.wordcounter.core.text.Text;
 import org.example.wordcounter.core.text.TextProvider;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_COMPLEX_TXT;
-import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_EMPTY_TXT;
-import static org.example.wordcounter.app.FileTextTests.CONTENT_OF_SIMPLE_TXT;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_COMPLEX_TXT;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_EMPTY_TXT;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_SIMPLE_TXT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

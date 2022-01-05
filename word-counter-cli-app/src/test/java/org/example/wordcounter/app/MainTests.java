@@ -1,5 +1,6 @@
 package org.example.wordcounter.app;
 
+import org.example.wordcounter.app.files.FileUtils;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
