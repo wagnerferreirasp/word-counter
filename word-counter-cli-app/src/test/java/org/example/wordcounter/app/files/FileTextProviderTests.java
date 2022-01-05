@@ -66,6 +66,6 @@ public class FileTextProviderTests {
 	}
 
 	private File givenPath(String name) {
-		return new File(FileUtils.getFullPath(name));
+		return new File(FileTestUtils.getFullPath(name));
 	}
 }

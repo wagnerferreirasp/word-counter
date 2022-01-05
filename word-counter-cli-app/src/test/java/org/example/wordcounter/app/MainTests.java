@@ -1,6 +1,6 @@
 package org.example.wordcounter.app;
 
-import org.example.wordcounter.app.files.FileUtils;
+import org.example.wordcounter.app.files.FileTestUtils;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +56,7 @@ public class MainTests {
 	void executeWithValidArgs_shouldCreateFile() {
 		Main.execute(givenValidArgs());
 
-		Text text = FileUtils.getText(OUTPUT_CSV, StandardCharsets.UTF_8);
+		Text text = FileTestUtils.getText(OUTPUT_CSV, StandardCharsets.UTF_8);
 		assertEquals(CONTENT_OF_COMPLEX_TXT, text.getContent());
 	}
 
@@ -64,13 +64,13 @@ public class MainTests {
 	void mainMethodWithValidArgs_shouldCreateFile() {
 		Main.main(givenValidArgs());
 
-		Text text = FileUtils.getText(OUTPUT_CSV, StandardCharsets.UTF_8);
+		Text text = FileTestUtils.getText(OUTPUT_CSV, StandardCharsets.UTF_8);
 		assertEquals(CONTENT_OF_COMPLEX_TXT, text.getContent());
 	}
 
 	@Test
 	void executeWithOutputNotWritable_shouldThrowException() {
-		File outputFile = new File(FileUtils.getFullPath(OUTPUT_CSV));
+		File outputFile = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
 		boolean lockedWrite = outputFile.setWritable(false);
 
 		assertTrue(lockedWrite);
@@ -96,8 +96,8 @@ public class MainTests {
 		return new String[]{
 			GROUP_SIZE_OPTION, "1",
 			ALPHABET_OPTION, base64Alphabet,
-            INPUT_PATH_OPTION, FileUtils.getFullPath("texts/utf8"),
-			OUTPUT_PATH_OPTION, FileUtils.getFullPath(OUTPUT_CSV)
+            INPUT_PATH_OPTION, FileTestUtils.getFullPath("texts/utf8"),
+			OUTPUT_PATH_OPTION, FileTestUtils.getFullPath(OUTPUT_CSV)
 		};
 	}
 

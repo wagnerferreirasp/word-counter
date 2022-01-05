@@ -7,7 +7,7 @@ import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import static org.example.wordcounter.app.files.FileUtils.getText;
+import static org.example.wordcounter.app.files.FileTestUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
