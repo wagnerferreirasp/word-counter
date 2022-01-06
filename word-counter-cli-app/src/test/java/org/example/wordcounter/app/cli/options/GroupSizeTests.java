@@ -2,14 +2,16 @@ package org.example.wordcounter.app.cli.options;
 
 import org.junit.jupiter.api.Test;
 import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GroupSizeTests extends OptionsBaseTests {
 
     @Test
-    void groupSizeNotPassed_ShouldThrowInvalidOption() {
+    void groupSizeNotPassed_ShouldDefaultToOne() {
         String[] args = givenOptionsNotPassing(GROUP_SIZE_OPTION);
 
-        assertInvalidOptionIsThrown(args);
+        Options options = optionsParser.parse(args);
+        assertEquals(1, options.getGroupSize());
     }
 
     @Test

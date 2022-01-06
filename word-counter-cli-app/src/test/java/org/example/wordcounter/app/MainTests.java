@@ -1,5 +1,6 @@
 package org.example.wordcounter.app;
 
+import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
@@ -11,11 +12,11 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import static org.example.wordcounter.app.cli.options.Constants.ALPHABET_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.ENGLISH_ALPHABET;
 import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.HELP_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Constants.LANGUAGE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.OUTPUT_PATH_OPTION;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -26,12 +27,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainTests {
 	private static final String CONTENT_OF_COMPLEX_TXT = "complexcontent,4\nsimplecontent,1";
 	private static final String OUTPUT_CSV = "output.csv";
+	public static final String INPUT_FOLDER = "texts/utf8";
 
 	@Test
 	void noParams_shouldShowInvalidParameterMessage() {
 		assertExceptionThrownWithMessageContaining(
 			() ->  Main.execute(new String[]{}),
-			ALPHABET_OPTION, INPUT_PATH_OPTION, HELP_OPTION
+			INPUT_PATH_OPTION, HELP_OPTION
 		);
 	}
 
@@ -39,7 +41,7 @@ public class MainTests {
 	void helpCommand() {
 		assertExceptionThrownWithMessageContaining(
 			() ->  Main.execute(new String[]{HELP_OPTION}),
-			ALPHABET_OPTION, INPUT_PATH_OPTION, HELP_OPTION
+			INPUT_PATH_OPTION, HELP_OPTION
 		);
 	}
 
@@ -92,11 +94,10 @@ public class MainTests {
 	}
 
 	private String[] givenValidArgs() {
-		String base64Alphabet = Base64.getEncoder().encodeToString(ENGLISH_ALPHABET.getBytes());
 		return new String[]{
 			GROUP_SIZE_OPTION, "1",
-			ALPHABET_OPTION, base64Alphabet,
-            INPUT_PATH_OPTION, FileTestUtils.getFullPath("texts/utf8"),
+			LANGUAGE_OPTION, "en",
+            INPUT_PATH_OPTION, FileTestUtils.getFullPath(INPUT_FOLDER),
 			OUTPUT_PATH_OPTION, FileTestUtils.getFullPath(OUTPUT_CSV)
 		};
 	}

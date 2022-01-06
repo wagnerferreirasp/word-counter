@@ -39,6 +39,6 @@ public class ApplicationConfig {
 	}
 
 	public WordRankingService getUseCase() {
-		return new WordRankingService(options.getAlphabet(), getTextProvider());
+		return new WordRankingService(options.getLanguage().getAlphabetRegex(), getTextProvider());
 	}
 }

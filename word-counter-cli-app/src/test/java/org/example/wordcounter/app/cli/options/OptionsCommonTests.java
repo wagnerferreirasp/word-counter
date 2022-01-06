@@ -20,13 +20,19 @@ public class OptionsCommonTests extends OptionsBaseTests {
 	}
 
 	@Test
-	void passValidOptions_ShouldParseCorrectly() {
-		String[] args = fromMap(getValidOpts());
+	void passValidRequiredOptions_ShouldParseCorrectly() {
+		String[] args = getValidRequiredArgs().toArray(String[]::new);
 
 		Options options = optionsParser.parse(args);
 
-		assertEquals(GROUP_SIZE_VALID_VALUE, options.getGroupSize());
-		assertEquals(ALPHABET_VALID_VALUE, options.getAlphabet());
-		assertEquals(PATH_VALID_VALUE, options.getInputPath().getName());
+		assertEquals(INPUT_PATH_VALID_VALUE, options.getInputPath().getName());
+		assertEquals(OUTPUT_PATH_VALID_VALUE, options.getOutputPath().getName());
+	}
+
+
+	@Test
+	void name() {
+		System.out.println(
+			optionsParser.getHelp());
 	}
 }

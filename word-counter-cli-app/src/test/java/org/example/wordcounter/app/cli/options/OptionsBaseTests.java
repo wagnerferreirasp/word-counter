@@ -3,20 +3,18 @@ package org.example.wordcounter.app.cli.options;
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
 import org.example.wordcounter.app.files.FileTestUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import static org.example.wordcounter.app.cli.options.Constants.ALPHABET_OPTION;
-import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.OUTPUT_PATH_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OptionsBaseTests {
-	private static final String OUTPUT_VALID_VALUE = "validOutput.txt";
-	public static final String PATH_VALID_VALUE = "validInput.txt";
-	public static final Integer GROUP_SIZE_VALID_VALUE = 1;
+	public static final String OUTPUT_PATH_VALID_VALUE = "validOutput.txt";
+	public static final String INPUT_PATH_VALID_VALUE = "validInput.txt";
 	public static final String ALPHABET_VALID_VALUE = "\\p{Alpha}";
 	public static final String BASE64_ALPHABET_VALID_VALUE = "XHB7QWxwaGF9";
 	public static final String INVALID_OPTION = "--invalid-option";
@@ -28,32 +26,33 @@ public class OptionsBaseTests {
 		assertThrows(InvalidOptionException.class, () -> optionsParser.parse(args));
 	}
 
-	protected String[] givenValidOptionsWith(String option, String value) {
-		Map<String, String> validArgs = getValidOpts();
-		validArgs.put(option, value);
-		return fromMap(validArgs);
-	}
-
 	protected String[] givenOptionsNotPassing(String option) {
-		Map<String, String> validArgs = getValidOpts();
-		validArgs.remove(option);
-		return fromMap(validArgs);
+		List<String> validArgs = getValidRequiredArgs();
+		int index = validArgs.indexOf(option);
+		if (index != -1) {
+			validArgs.remove(index);
+			validArgs.remove(index+1);
+		}
+		return validArgs.toArray(String[]::new);
 	}
 
-	protected Map<String, String> getValidOpts() {
-		return new HashMap<>() {{
-			put(GROUP_SIZE_OPTION, GROUP_SIZE_VALID_VALUE.toString());
-			put(ALPHABET_OPTION, BASE64_ALPHABET_VALID_VALUE);
-			put(INPUT_PATH_OPTION, FileTestUtils.getFullPath(PATH_VALID_VALUE));
-			put(OUTPUT_PATH_OPTION, OUTPUT_VALID_VALUE);
-		}};
+	protected String[] givenValidOptionsWith(String option, String value) {
+		List<String> validArgs = getValidRequiredArgs();
+		int index = validArgs.indexOf(option);
+		if (index != -1) {
+			validArgs.set(index + 1, value);
+		} else {
+			validArgs.add(option);
+			validArgs.add(value);
+		}
+		return validArgs.toArray(String[]::new);
 	}
 
-	protected String[] fromMap(Map<String, String> map) {
-		return map.entrySet()
-				.stream()
-				.map((entry -> new String[]{entry.getKey(), entry.getValue()}))
-				.flatMap(Stream::of)
-				.toArray(String[]::new);
+	protected List<String> getValidRequiredArgs() {
+		return new ArrayList<>(List.of(
+			INPUT_PATH_OPTION, FileTestUtils.getFullPath(INPUT_PATH_VALID_VALUE),
+			OUTPUT_PATH_OPTION, FileTestUtils.getFullPath(OUTPUT_PATH_VALID_VALUE)
+		));
 	}
+
 }
