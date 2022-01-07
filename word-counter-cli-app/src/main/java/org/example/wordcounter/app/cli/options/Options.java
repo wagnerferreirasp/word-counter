@@ -41,7 +41,9 @@ public class Options {
     )
     private Integer groupSize = 1;
 
-    @Parameter(description = "Language - the language of the texts. Possible values: EN, CUSTOM:{base64alphabet}",
+    @Parameter(description = "Language - the language of the texts. " +
+        "\nPossible values: CZ (Czech), EN (English), ES (Spanish) or a custom language by " +
+        "passing the list of letters encoded in base64 - CUSTOM:<base64alphabet>",
         names = {LANGUAGE_OPTION}, converter = LanguageConverter.class
     )
     private Language language = Language.EN;

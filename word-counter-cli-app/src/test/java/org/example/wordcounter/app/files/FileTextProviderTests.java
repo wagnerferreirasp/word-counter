@@ -5,8 +5,8 @@ import org.example.wordcounter.core.text.TextProvider;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public class FileTextProviderTests {
 
 	@Test
 	void fileDoesNotExist_ShouldThrowException() {
-		assertThrows(UncheckedIOException.class,
+		assertThrows(NoSuchFileException.class,
 			() -> new FileTextProvider(givenFileThatDoesntExist(), StandardCharsets.UTF_8)
 		);
 	}

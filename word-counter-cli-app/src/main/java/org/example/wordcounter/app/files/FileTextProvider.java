@@ -1,12 +1,12 @@
 package org.example.wordcounter.app.files;
 
+import lombok.SneakyThrows;
 import org.example.wordcounter.core.text.Text;
 import org.example.wordcounter.core.text.TextProvider;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
+import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,9 +20,10 @@ public class FileTextProvider implements TextProvider {
 	private final File path;
 	private final Charset encoding;
 
+	@SneakyThrows
 	public FileTextProvider(File path, Charset encoding) {
 		if (!path.exists()) {
-			throw new UncheckedIOException(new FileNotFoundException(path.getName()));
+			throw new NoSuchFileException(path.getName());
 		}
 		this.path = path;
 		this.encoding = encoding;

@@ -29,10 +29,4 @@ public class OptionsCommonTests extends OptionsBaseTests {
 		assertEquals(OUTPUT_PATH_VALID_VALUE, options.getOutputPath().getName());
 	}
 
-
-	@Test
-	void name() {
-		System.out.println(
-			optionsParser.getHelp());
-	}
 }

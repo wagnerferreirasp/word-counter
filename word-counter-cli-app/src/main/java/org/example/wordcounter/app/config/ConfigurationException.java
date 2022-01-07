@@ -1,4 +1,4 @@
-package org.example.wordcounter.app;
+package org.example.wordcounter.app.config;
 
 /**
  * Thrown when a configuration option is invalid

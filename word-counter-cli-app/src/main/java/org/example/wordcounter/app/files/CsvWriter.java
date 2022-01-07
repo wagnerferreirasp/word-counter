@@ -1,9 +1,9 @@
 package org.example.wordcounter.app.files;
 
+import lombok.SneakyThrows;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,11 +33,10 @@ public class CsvWriter {
         return String.format("%s,%d", word, rank);
     }
 
+    @SneakyThrows
     private static void writeToCsv(File outputPath, Charset encoding, String content) {
         try (FileOutputStream outputStream = new FileOutputStream(outputPath)) {
             outputStream.write(content.getBytes(encoding));
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
         }
     }
 

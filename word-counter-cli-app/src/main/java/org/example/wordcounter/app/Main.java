@@ -1,10 +1,11 @@
 package org.example.wordcounter.app;
 
 import org.example.wordcounter.app.cli.options.Options;
+import org.example.wordcounter.app.config.ApplicationConfig;
+import org.example.wordcounter.app.config.ConfigurationException;
 import org.example.wordcounter.app.files.CsvWriter;
 import org.example.wordcounter.core.counter.WordRankingService;
 
-import java.io.UncheckedIOException;
 import java.util.LinkedHashMap;
 
 public class Main {
@@ -12,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Main.execute(args);
-        } catch (ConfigurationException | UncheckedIOException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }

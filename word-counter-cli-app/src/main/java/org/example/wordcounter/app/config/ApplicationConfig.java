@@ -1,13 +1,13 @@
-package org.example.wordcounter.app;
+package org.example.wordcounter.app.config;
 
 import lombok.Getter;
 import org.example.wordcounter.app.cli.options.InvalidOptionException;
-import org.example.wordcounter.app.files.FileTextProvider;
 import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.cli.options.OptionsParser;
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
-import org.example.wordcounter.core.text.TextProvider;
+import org.example.wordcounter.app.files.FileTextProvider;
 import org.example.wordcounter.core.counter.WordRankingService;
+import org.example.wordcounter.core.text.TextProvider;
 
 public class ApplicationConfig {
 
@@ -24,7 +24,7 @@ public class ApplicationConfig {
 		} catch (InvalidOptionException e) {
 			String message = String.format("%s\n%s",
 				e.getCause().getMessage(),
-				"Try using the option '--help'"
+				optionsParser.getHelp()
 			);
 			throw new ConfigurationException(message);
 		}

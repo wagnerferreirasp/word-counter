@@ -12,7 +12,7 @@ public class LanguageTests extends OptionsBaseTests {
         String[] args = givenOptionsNotPassing(LANGUAGE_OPTION);
 
         Options options = optionsParser.parse(args);
-        assertEquals(Language.EN, options.getLanguage());
+        assertEquals("EN", options.getLanguage().getName().toUpperCase());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class LanguageTests extends OptionsBaseTests {
 
     @Test
     void languageCustom_ShouldSpecifyAlphabet() {
-        String[] args = givenValidOptionsWith(LANGUAGE_OPTION, Language.CUSTOM.getName());
+        String[] args = givenValidOptionsWith(LANGUAGE_OPTION, "CUSTOM");
 
         assertInvalidOptionIsThrown(args);
     }
@@ -39,4 +39,23 @@ public class LanguageTests extends OptionsBaseTests {
 
         assertEquals(ALPHABET_VALID_VALUE, options.getLanguage().getAlphabetRegex());
     }
+
+    @Test
+    void czechShouldBeAvailable() {
+        String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"CZ");
+
+        Options options = optionsParser.parse(args);
+
+        assertEquals("CZ", options.getLanguage().getName().toUpperCase());
+    }
+
+    @Test
+    void spanishShouldBeAvailable() {
+        String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"ES");
+
+        Options options = optionsParser.parse(args);
+
+        assertEquals("ES", options.getLanguage().getName().toUpperCase());
+    }
+
 }

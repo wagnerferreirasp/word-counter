@@ -3,9 +3,9 @@ package org.example.wordcounter.app.files;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.NoSuchFileException;
 
 import static org.example.wordcounter.app.files.FileTestUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +22,7 @@ public class FileTextTests {
 	@Test
 	void nonexistentFile_ShouldThrowException() {
 		Text text = givenFileThatDoesntExist();
-		assertThrows(UncheckedIOException.class,
+		assertThrows(NoSuchFileException.class,
 			text::getContent
 		);
 	}

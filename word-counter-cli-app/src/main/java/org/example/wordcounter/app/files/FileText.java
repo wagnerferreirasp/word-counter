@@ -1,10 +1,9 @@
 package org.example.wordcounter.app.files;
 
+import lombok.SneakyThrows;
 import org.example.wordcounter.core.text.Text;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,12 +29,9 @@ public class FileText implements Text {
 		return content;
 	}
 
+	@SneakyThrows
 	private String readFile() {
-		try {
-			byte[] bytes = Files.readAllBytes(Paths.get(file.getPath()));
-			return new String(bytes, encoding);
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
+		byte[] bytes = Files.readAllBytes(Paths.get(file.getPath()));
+		return new String(bytes, encoding);
 	}
 }

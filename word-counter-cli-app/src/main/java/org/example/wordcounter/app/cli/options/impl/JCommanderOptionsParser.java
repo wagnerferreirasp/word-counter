@@ -22,6 +22,9 @@ public class JCommanderOptionsParser implements OptionsParser {
 		this.options = new Options();
 		jCommander.addObject(options);
 		jCommander.setProgramName(APP_NAME);
+		if (jCommander.getDescriptions() == null) {
+			jCommander.createDescriptions();
+		}
 	}
 
 	@Override
@@ -36,32 +39,35 @@ public class JCommanderOptionsParser implements OptionsParser {
 
 	@Override
 	public String getHelp() {
-		if (jCommander.getDescriptions() == null) {
-			jCommander.createDescriptions();
-		}
 		List<ParameterDescription> params = new ArrayList<>(jCommander.getFields().values());
-
 		return String.format(
-			"Usage: java -jar %s-{version}.jar [options]\n" +
-			"  Required options:\n" +
-			"%s\n" +
-			"  Non-required options:\n" +
-			"%s\n",
+			"\nUsage: java -jar %s-{version}.jar [options]" +
+			"\n\tRequired options:" +
+			"%s" +
+			"\n\n\tNon-required options:" +
+			"%s",
 			APP_NAME, formatOptions(params, true), formatOptions(params, false));
 	}
 
 	private String formatOptions(List<ParameterDescription> params, boolean isRequired) {
 		return params.stream()
 			.filter(param -> isRequired == param.getParameter().getParameter().required())
-			.map(param -> String.format(
-				"    %s\n" +
-				"    %s\n" +
-				"    %s",
-				param.getNames(),
-				param.getDescription(),
-				isRequired ? "" : String.format("Default: %s\n", param.getDefault())
-			))
+			.map(this::formatOption)
 			.collect(Collectors.joining("\n"));
+	}
+
+	private String formatOption(ParameterDescription param) {
+		boolean isRequired = param.getParameter().getParameter().required();
+		return String.format(
+			"\n\t\t%s" +
+			"\n\t\t%s" +
+			"%s",
+			param.getNames(),
+			String.join("\n\t\t",
+				param.getDescription().split("\n") // consider multiline descriptions
+			),
+			isRequired ? "" : String.format("\n\t\tDefault: %s", param.getDefault())
+		);
 	}
 
 }

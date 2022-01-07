@@ -1,18 +1,16 @@
 package org.example.wordcounter.app;
 
-import org.example.wordcounter.app.cli.options.Options;
+import org.example.wordcounter.app.config.ConfigurationException;
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
-import static org.example.wordcounter.app.cli.options.Constants.ENGLISH_ALPHABET;
 import static org.example.wordcounter.app.cli.options.Constants.GROUP_SIZE_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.HELP_OPTION;
 import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
@@ -76,7 +74,7 @@ public class MainTests {
 		boolean lockedWrite = outputFile.setWritable(false);
 
 		assertTrue(lockedWrite);
-		assertThrows(UncheckedIOException.class,
+		assertThrows(IOException.class,
 			() -> Main.execute(givenValidArgs())
 		);
 		boolean unlockedWrite = outputFile.setWritable(true);
@@ -124,7 +122,7 @@ public class MainTests {
 		test.run();
 		assertThat(errContent.toString(), containsString(expectedContent));
 
-		System.setOut(originalErr);
+		System.setErr(originalErr);
 	}
 
 }
