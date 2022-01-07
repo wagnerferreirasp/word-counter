@@ -16,8 +16,8 @@ public class WordRankingService {
     private final WordCounter wordCounter;
     private final TextProvider textProvider;
 
-    public WordRankingService(String alphabet, TextProvider textProvider) {
-        this.wordCounter = new WordCounter(alphabet);
+    public WordRankingService(String alphabetRegex, TextProvider textProvider) {
+        this.wordCounter = new WordCounter(alphabetRegex);
         this.textProvider = textProvider;
     }
 

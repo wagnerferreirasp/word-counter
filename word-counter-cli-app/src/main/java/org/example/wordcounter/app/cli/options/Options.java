@@ -46,7 +46,7 @@ public class Options {
         "passing the list of letters encoded in base64 - CUSTOM:<base64alphabet>",
         names = {LANGUAGE_OPTION}, converter = LanguageConverter.class
     )
-    private Language language = Language.EN;
+    private Language language = Constants.EN;
 
     @Parameter(description = "Encoding - encoding to consider when reading files from " + INPUT_PATH_OPTION,
         names = {ENCODING_OPTION}, converter = CharsetStringConverter.class

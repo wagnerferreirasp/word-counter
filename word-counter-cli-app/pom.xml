@@ -25,6 +25,8 @@
                             <mainClass>org.example.wordcounter.app.Main</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>${project.artifactId}-${project.version}-full</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -67,6 +69,13 @@
             <groupId>org.example.wordcounter</groupId>
             <artifactId>word-counter-core</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Other dependencies -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

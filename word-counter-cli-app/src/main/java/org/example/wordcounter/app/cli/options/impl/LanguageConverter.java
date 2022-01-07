@@ -2,6 +2,7 @@ package org.example.wordcounter.app.cli.options.impl;
 
 import com.beust.jcommander.ParameterException;
 import com.beust.jcommander.converters.BaseConverter;
+import org.example.wordcounter.app.cli.options.Constants;
 import org.example.wordcounter.app.cli.options.Language;
 
 import java.util.Base64;
@@ -13,14 +14,14 @@ public class LanguageConverter extends BaseConverter<Language> {
 
     @Override
     public Language convert(String value) {
-        try {
-            if (value.toUpperCase().startsWith("CUSTOM")) {
-                return convertCustom(value);
-            }
-            return Language.of(value);
-        } catch (IllegalArgumentException e) {
-            throw new ParameterException("Language not found!");
+        if (value.toUpperCase().startsWith(Constants.CUSTOM_LANGUAGE_NAME)) {
+            return convertCustom(value);
         }
+
+        return Constants.AVAILABLE_LANGUAGES.stream()
+            .filter(language -> value.equalsIgnoreCase(language.getName()))
+            .findAny()
+            .orElseThrow(() -> new ParameterException("No language found with name " + value));
     }
 
     private Language convertCustom(String value) {
