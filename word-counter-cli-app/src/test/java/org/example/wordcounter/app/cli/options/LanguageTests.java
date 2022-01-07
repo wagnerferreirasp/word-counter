@@ -58,4 +58,13 @@ public class LanguageTests extends OptionsBaseTests {
         assertEquals("ES", options.getLanguage().getName().toUpperCase());
     }
 
+    @Test
+    void portugueseShouldBeAvailable() {
+        String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"PT");
+
+        Options options = optionsParser.parse(args);
+
+        assertEquals("PT", options.getLanguage().getName().toUpperCase());
+    }
+
 }
