@@ -17,11 +17,7 @@ public class LanguageConverter extends BaseConverter<Language> {
         if (value.toUpperCase().startsWith(Constants.CUSTOM_LANGUAGE_NAME)) {
             return convertCustom(value);
         }
-
-        return Constants.AVAILABLE_LANGUAGES.stream()
-            .filter(language -> value.equalsIgnoreCase(language.getName()))
-            .findAny()
-            .orElseThrow(() -> new ParameterException("No language found with name " + value));
+        return convertFromAvailableLanguages(value);
     }
 
     private Language convertCustom(String value) {
@@ -32,5 +28,12 @@ public class LanguageConverter extends BaseConverter<Language> {
         }
         byte[] alphabetBytes = Base64.getDecoder().decode(valueArray[1]);
         return Language.customOf(new String(alphabetBytes));
+    }
+
+    private Language convertFromAvailableLanguages(String value) {
+        return Constants.AVAILABLE_LANGUAGES.stream()
+            .filter(language -> value.equalsIgnoreCase(language.getName()))
+            .findAny()
+            .orElseThrow(() -> new ParameterException("No language found with name " + value));
     }
 }

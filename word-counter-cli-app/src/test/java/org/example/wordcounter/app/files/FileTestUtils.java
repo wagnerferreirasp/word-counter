@@ -8,7 +8,8 @@ import java.nio.charset.Charset;
 public class FileTestUtils {
 
 	public static String getFullPath(String relativeName) {
-		return FileTestUtils.class.getClassLoader().getResource("").getPath() + relativeName;
+		String projectRoot = System.getProperty("user.dir");
+		return String.format("%s/src/test/resources/%s", projectRoot, relativeName);
 	}
 
 	public static Text getText(String fileName, Charset encoding) {

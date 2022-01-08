@@ -3,10 +3,12 @@ package org.example.wordcounter.app.files;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 
+import static org.example.wordcounter.app.files.FileTestUtils.getFullPath;
 import static org.example.wordcounter.app.files.FileTestUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +18,9 @@ public class FileTextTests {
 	public static final String CONTENT_OF_SIMPLE_TXT = "simpleContent";
 	public static final String CONTENT_OF_CP1250_TXT = "příští zaměstnanec";
 	public static final String CONTENT_OF_COMPLEX_TXT = "complexContent\ncomplexContent\ncomplexContent\ncomplexContent";
+	public static final String CONTENT_OF_FILEABC = "fileABC - Content";
+	public static final String CONTENT_OF_FILEBCD = "fileBCD - Content";
+	public static final String CONTENT_OF_ROOTFILE = "rootFile - Content";
 	public static final String CONTENT_OF_EMPTY_TXT = "";
 
 
@@ -57,6 +62,14 @@ public class FileTextTests {
 		String content = text.getContent();
 
 		assertEquals(CONTENT_OF_COMPLEX_TXT, content);
+	}
+
+	@Test
+	void passFolderToFileText_ShouldThrowException() {
+		String folderName = "texts/utf8";
+
+		assertThrows(IllegalArgumentException.class, () ->
+			new FileText(new File(getFullPath(folderName)), StandardCharsets.UTF_8));
 	}
 
 	public Text givenSimpleTextFile() {

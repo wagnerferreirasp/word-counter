@@ -16,8 +16,11 @@ public class FileText implements Text {
 	private final Charset encoding;
 	private String content;
 
-	public FileText(File file, Charset encoding) {
-		this.file = file;
+	public FileText(File path, Charset encoding) {
+		if (path.isDirectory()) {
+			throw new IllegalArgumentException("Path can't be a directory");
+		}
+		this.file = path;
 		this.encoding = encoding;
 	}
 

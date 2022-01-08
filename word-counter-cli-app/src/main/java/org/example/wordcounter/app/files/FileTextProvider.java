@@ -8,6 +8,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,15 +32,17 @@ public class FileTextProvider implements TextProvider {
 
 	@Override
 	public List<Text> findAll() {
-		if (!path.isDirectory()) {
-			return Collections.singletonList(getTextFromFile(path));
-		}
-		return Arrays.stream(path.listFiles())
-				.map(this::getTextFromFile)
-				.collect(Collectors.toList());
+		return findTextsFromPath(path);
 	}
 
-	private Text getTextFromFile(File file) {
-		return new FileText(file, encoding);
+	private List<Text> findTextsFromPath(File path) {
+		if (!path.isDirectory()) {
+			return List.of(new FileText(path, encoding));
+		}
+		return Arrays.stream(path.listFiles())
+			.map(this::findTextsFromPath)
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList());
 	}
+
 }

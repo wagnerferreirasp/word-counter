@@ -7,13 +7,19 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_COMPLEX_TXT;
 import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_EMPTY_TXT;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_FILEABC;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_FILEBCD;
+import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_ROOTFILE;
 import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_SIMPLE_TXT;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,6 +33,15 @@ public class FileTextProviderTests {
 	}
 
 	@Test
+	void emptyFolder_ShouldReturnEmptyList() {
+		TextProvider textProvider = new FileTextProvider(givenEmptyFolder(), StandardCharsets.UTF_8);
+
+		List<Text> texts = textProvider.findAll();
+
+		assertThat(texts, is(empty()));
+	}
+
+	@Test
 	void simpleFile_ShouldLoadCorrectly() {
 		TextProvider textProvider = new FileTextProvider(givenSimpleFile(), StandardCharsets.UTF_8);
 
@@ -37,19 +52,33 @@ public class FileTextProviderTests {
 	}
 
 	@Test
-	void simpleFolder_ShouldLoadCorrectly() {
-		TextProvider textProvider = new FileTextProvider(givenSimpleFolder(), StandardCharsets.UTF_8);
-
-		List<String> actualContents = textProvider.findAll()
-				.stream()
-				.map(Text::getContent)
-				.collect(Collectors.toList());
-
-		List<String> expectedContents = Arrays.asList(
+	void simpleFolder_ShouldItsFiles() {
+		File folder = givenSimpleFolder();
+		Set<String> expectedContents = Set.of(
 			CONTENT_OF_COMPLEX_TXT, CONTENT_OF_EMPTY_TXT, CONTENT_OF_SIMPLE_TXT
 		);
 
-		assertEquals(3, actualContents.size());
+		assertFindAllOfFolderReturnsContents(folder, expectedContents);
+	}
+
+	@Test
+	void multiLevelFolder_ShouldLoadAllLevels() {
+		File folder = givenMultiLevelFolder();
+		Set<String> expectedContents = Set.of(
+			CONTENT_OF_FILEABC, CONTENT_OF_ROOTFILE, CONTENT_OF_FILEBCD
+		);
+
+		assertFindAllOfFolderReturnsContents(folder, expectedContents);
+	}
+
+	private void assertFindAllOfFolderReturnsContents(File folder, Set<String> expectedContents) {
+		TextProvider textProvider = new FileTextProvider(folder, StandardCharsets.UTF_8);
+
+		Set<String> actualContents = textProvider.findAll()
+			.stream()
+			.map(Text::getContent)
+			.collect(Collectors.toSet());
+
 		assertEquals(expectedContents, actualContents);
 	}
 
@@ -63,6 +92,14 @@ public class FileTextProviderTests {
 
 	private File givenSimpleFolder() {
 		return givenPath("texts/utf8");
+	}
+
+	private File givenEmptyFolder() {
+		return givenPath("texts/emptyFolder");
+	}
+
+	private File givenMultiLevelFolder() {
+		return givenPath("texts/multiLevel");
 	}
 
 	private File givenPath(String name) {
