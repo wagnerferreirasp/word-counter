@@ -2,7 +2,6 @@ package org.example.wordcounter.app;
 
 import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.config.ApplicationConfig;
-import org.example.wordcounter.app.config.ConfigurationException;
 import org.example.wordcounter.app.files.CsvWriter;
 import org.example.wordcounter.core.counter.WordRankingService;
 

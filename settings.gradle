@@ -1,0 +1,4 @@
+rootProject.name = 'word-counter'
+
+include 'word-counter-core'
+include 'word-counter-cli-app'

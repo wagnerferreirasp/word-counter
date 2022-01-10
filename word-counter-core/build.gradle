@@ -1,0 +1,22 @@
+plugins {
+	id 'java'
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+group = 'org.example.wordcounter'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testImplementation 'org.hamcrest:hamcrest-all:1.3'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+	useJUnitPlatform()
+}
