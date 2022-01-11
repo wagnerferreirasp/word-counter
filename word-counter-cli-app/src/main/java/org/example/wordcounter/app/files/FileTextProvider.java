@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Provides the Texts via Files
@@ -32,17 +33,16 @@ public class FileTextProvider implements TextProvider {
 
 	@Override
 	public List<Text> findAll() {
-		return findTextsFromPath(path);
+		return findTextsFromPath(path)
+			.collect(Collectors.toList());
 	}
 
-	private List<Text> findTextsFromPath(File path) {
+	private Stream<Text> findTextsFromPath(File path) {
 		if (!path.isDirectory()) {
-			return List.of(new FileText(path, encoding));
+			return Stream.of(new FileText(path, encoding));
 		}
 		return Arrays.stream(path.listFiles())
-			.map(this::findTextsFromPath)
-			.flatMap(Collection::stream)
-			.collect(Collectors.toList());
+			.flatMap(this::findTextsFromPath);
 	}
 
 }
