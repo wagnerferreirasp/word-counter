@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import static org.example.wordcounter.app.cli.options.Constants.ENCODING_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EncodingTests extends OptionsBaseTests {
+class EncodingTests extends OptionsBaseTests {
 
 	@Test
 	void dontPassEncoding_UTF8ShouldBeUsed() {

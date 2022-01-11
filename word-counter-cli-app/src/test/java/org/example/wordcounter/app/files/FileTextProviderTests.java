@@ -99,7 +99,7 @@ public class FileTextProviderTests {
 		File folder = new File(FileTestUtils.getFullPath("texts/emptyFolder"));
 		if (!folder.exists()) {
 			boolean createdFolder = folder.mkdir();
-			assertTrue(createdFolder);
+			assertTrue(createdFolder); // fail-fast
 		}
 		return folder;
 	}

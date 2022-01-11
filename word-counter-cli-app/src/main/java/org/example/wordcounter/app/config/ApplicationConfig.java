@@ -38,7 +38,7 @@ public class ApplicationConfig {
 		return new FileTextProvider(options.getInputPath(), options.getEncoding());
 	}
 
-	public WordRankingService getUseCase() {
+	public WordRankingService getRankingService() {
 		return new WordRankingService(options.getLanguage().getAlphabetRegex(), getTextProvider());
 	}
 }
