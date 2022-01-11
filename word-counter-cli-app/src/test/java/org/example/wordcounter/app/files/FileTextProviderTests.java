@@ -1,15 +1,15 @@
 package org.example.wordcounter.app.files;
 
-import org.example.wordcounter.core.text.Text;
-import org.example.wordcounter.core.text.TextProvider;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.example.wordcounter.core.text.Text;
+import org.example.wordcounter.core.text.TextProvider;
+import org.junit.jupiter.api.Test;
 
 import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_COMPLEX_TXT;
 import static org.example.wordcounter.app.files.FileTextTests.CONTENT_OF_EMPTY_TXT;
@@ -22,6 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileTextProviderTests {
 
@@ -95,7 +96,12 @@ public class FileTextProviderTests {
 	}
 
 	private File givenEmptyFolder() {
-		return givenPath("texts/emptyFolder");
+		File folder = new File(FileTestUtils.getFullPath("texts/emptyFolder"));
+		if (!folder.exists()) {
+			boolean createdFolder = folder.mkdir();
+			assertTrue(createdFolder);
+		}
+		return folder;
 	}
 
 	private File givenMultiLevelFolder() {
