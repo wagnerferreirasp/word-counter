@@ -52,16 +52,14 @@ class MainTests {
 	}
 
 	@Test
-	void executeWithOutputNotWritable_exceptionShouldBubbleUp() {
-		File outputFile = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
-		boolean lockedWrite = outputFile.setWritable(false);
+	void executeWithOutputNotWritable_exceptionShouldBubbleUp() throws IOException {
+		File outputFile = givenOutputNotWritable();
 
-		assertTrue(lockedWrite);
 		assertThrows(IOException.class,
 			() -> Main.main(givenValidArgs())
 		);
-		boolean unlockedWrite = outputFile.setWritable(true);
-		assertTrue(unlockedWrite);
+
+		cleanupOutputFileNotWritable(outputFile);
 	}
 
 	@Test
@@ -88,6 +86,21 @@ class MainTests {
 		file.deleteOnExit();
 	}
 
+	private File givenOutputNotWritable() throws IOException {
+		File outputFile = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
+		boolean fileCreated = outputFile.createNewFile();
+		boolean fileLocked = outputFile.setWritable(false);
+		assertTrue(fileCreated);
+		assertTrue(fileLocked);
+		return outputFile;
+	}
+
+	private void cleanupOutputFileNotWritable(File outputFile) {
+		boolean fileUnlocked = outputFile.setWritable(true);
+		assertTrue(fileUnlocked);
+		outputFile.deleteOnExit();
+	}
+
 	private String[] givenValidArgs() {
 		return new String[]{
 			GROUP_SIZE_OPTION, "1",
@@ -99,13 +112,14 @@ class MainTests {
 
 	private void assertStderrContains(Runnable test, String... expectedContents) {
 		PrintStream originalErr = System.err;
-		ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-		System.setErr(new PrintStream(errContent));
+		ByteArrayOutputStream errStream = new ByteArrayOutputStream();
+		System.setErr(new PrintStream(errStream));
 
 		test.run();
 
+		String errContent = errStream.toString();
 		for (String expected : expectedContents) {
-			assertThat(errContent.toString(), containsString(expected));
+			assertThat(errContent, containsString(expected));
 		}
 
 		System.setErr(originalErr);
