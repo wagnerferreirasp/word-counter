@@ -12,7 +12,8 @@ public class LanguageTests extends OptionsBaseTests {
         String[] args = givenOptionsNotPassing(LANGUAGE_OPTION);
 
         Options options = optionsParser.parse(args);
-        assertEquals("EN", options.getLanguage().getName().toUpperCase());
+        assertEquals("EN", options.getLanguage().getShortName().toUpperCase());
+        assertEquals("ENGLISH", options.getLanguage().getLongName().toUpperCase());
     }
 
     @Test
@@ -46,7 +47,7 @@ public class LanguageTests extends OptionsBaseTests {
 
         Options options = optionsParser.parse(args);
 
-        assertEquals("CZ", options.getLanguage().getName().toUpperCase());
+        assertEquals("CZ", options.getLanguage().getShortName().toUpperCase());
     }
 
     @Test
@@ -55,7 +56,7 @@ public class LanguageTests extends OptionsBaseTests {
 
         Options options = optionsParser.parse(args);
 
-        assertEquals("ES", options.getLanguage().getName().toUpperCase());
+        assertEquals("ES", options.getLanguage().getShortName().toUpperCase());
     }
 
     @Test
@@ -64,7 +65,7 @@ public class LanguageTests extends OptionsBaseTests {
 
         Options options = optionsParser.parse(args);
 
-        assertEquals("PT", options.getLanguage().getName().toUpperCase());
+        assertEquals("PT", options.getLanguage().getShortName().toUpperCase());
     }
 
 }

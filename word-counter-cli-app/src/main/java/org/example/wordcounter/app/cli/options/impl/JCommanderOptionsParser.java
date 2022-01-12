@@ -4,6 +4,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterDescription;
 import com.beust.jcommander.ParameterException;
 import org.example.wordcounter.app.cli.options.InvalidOptionException;
+import org.example.wordcounter.app.cli.options.Language;
 import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.cli.options.OptionsParser;
 
@@ -63,11 +64,23 @@ public class JCommanderOptionsParser implements OptionsParser {
 			"\n\t\t%s" +
 			"%s",
 			param.getNames(),
-			String.join("\n\t\t",
-				param.getDescription().split("\n") // consider multiline descriptions
-			),
+			getMultilineDescription(param),
 			isRequired ? "" : String.format("\n\t\tDefault: %s", param.getDefault())
 		);
+	}
+
+	private String getMultilineDescription(ParameterDescription param) {
+		String description = param.getDescription();
+		if (param.getNames().contains(Options.Names.LANGUAGE_OPTION)) {
+			description = String.format(description, formatAvailableLanguages());
+		}
+		return String.join("\n\t\t", description.split("\n"));
+	}
+
+	private String formatAvailableLanguages() {
+		return Language.AVAILABLE_LANGUAGES.stream()
+			.map(Language::toString)
+			.collect(Collectors.joining(", "));
 	}
 
 }

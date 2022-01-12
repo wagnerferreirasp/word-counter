@@ -59,7 +59,7 @@ class MainTests {
 			() -> Main.main(givenValidArgs())
 		);
 
-		cleanupOutputFileNotWritable(outputFile);
+		cleanupOutputNotWritable(outputFile);
 	}
 
 	@Test
@@ -88,14 +88,16 @@ class MainTests {
 
 	private File givenOutputNotWritable() throws IOException {
 		File outputFile = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
-		boolean fileCreated = outputFile.createNewFile();
+		if (!outputFile.exists()) {
+			boolean fileCreated = outputFile.createNewFile();
+			assertTrue(fileCreated);
+		}
 		boolean fileLocked = outputFile.setWritable(false);
-		assertTrue(fileCreated);
 		assertTrue(fileLocked);
 		return outputFile;
 	}
 
-	private void cleanupOutputFileNotWritable(File outputFile) {
+	private void cleanupOutputNotWritable(File outputFile) {
 		boolean fileUnlocked = outputFile.setWritable(true);
 		assertTrue(fileUnlocked);
 		outputFile.deleteOnExit();

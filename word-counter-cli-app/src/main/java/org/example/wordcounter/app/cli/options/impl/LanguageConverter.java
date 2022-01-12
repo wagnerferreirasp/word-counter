@@ -2,7 +2,7 @@ package org.example.wordcounter.app.cli.options.impl;
 
 import com.beust.jcommander.ParameterException;
 import com.beust.jcommander.converters.BaseConverter;
-import org.example.wordcounter.app.cli.options.Constants;
+
 import org.example.wordcounter.app.cli.options.Language;
 
 import java.util.Base64;
@@ -32,7 +32,7 @@ public class LanguageConverter extends BaseConverter<Language> {
 
     private Language convertFromAvailableLanguages(String value) {
         return Language.AVAILABLE_LANGUAGES.stream()
-            .filter(language -> value.equalsIgnoreCase(language.getName()))
+            .filter(language -> value.equalsIgnoreCase(language.getShortName()))
             .findAny()
             .orElseThrow(() -> new ParameterException("No language found with name " + value));
     }

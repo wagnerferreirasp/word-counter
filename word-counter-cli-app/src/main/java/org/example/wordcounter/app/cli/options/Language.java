@@ -8,31 +8,33 @@ import lombok.Getter;
 public class Language {
 
     public static final String CUSTOM_NAME = "CUSTOM";
-    public static final Language CZ = Language.of("CZ", "ěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮ\\p{Alpha}");
-    public static final Language EN = Language.of("EN", "-'éç\\p{Alpha}");
-    public static final Language ES = Language.of("ES", "-'áéíñóúüÁÉÍÑÓÚÜ\\p{Alpha}");
-    public static final Language PT = Language.of("PT", "-'áéíóúàãõâêüçÁÉÍÓÚÀÃÕÂÊÜÇ\\p{Alpha}");
+    public static final Language CZ = Language.of("CZ", "Czech", "ěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮ\\p{Alpha}");
+    public static final Language EN = Language.of("EN", "English", "-'éç\\p{Alpha}");
+    public static final Language ES = Language.of("ES", "Spanish", "-'áéíñóúüÁÉÍÑÓÚÜ\\p{Alpha}");
+    public static final Language PT = Language.of("PT", "Portuguese", "-'áéíóúàãõâêüçÁÉÍÓÚÀÃÕÂÊÜÇ\\p{Alpha}");
     public static final List<Language> AVAILABLE_LANGUAGES = List.of(EN, CZ, ES, PT);
 
-    private final String name;
+    private final String shortName;
+    private final String longName;
     private final String alphabetRegex;
 
-    private Language(String name, String alphabetRegex) {
-        this.name = name;
+    private Language(String shortName, String longName, String alphabetRegex) {
+        this.shortName = shortName;
+        this.longName = longName;
         this.alphabetRegex = alphabetRegex;
     }
 
-    public static Language of(String name, String alphabetRegex) {
-        return new Language(name, alphabetRegex);
+    public static Language of(String shortName, String longName, String alphabetRegex) {
+        return new Language(shortName, longName, alphabetRegex);
     }
 
     public static Language customOf(String alphabetRegex) {
-        return new Language(CUSTOM_NAME, alphabetRegex);
+        return new Language(CUSTOM_NAME, CUSTOM_NAME, alphabetRegex);
     }
 
     @Override
     public String toString() {
-        return name;
+        return String.format("%s (%s)", shortName, longName);
     }
 
 }
