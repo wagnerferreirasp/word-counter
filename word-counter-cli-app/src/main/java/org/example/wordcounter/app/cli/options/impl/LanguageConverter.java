@@ -14,7 +14,7 @@ public class LanguageConverter extends BaseConverter<Language> {
 
     @Override
     public Language convert(String value) {
-        if (value.toUpperCase().startsWith(Constants.CUSTOM_LANGUAGE_NAME)) {
+        if (value.toUpperCase().startsWith(Language.CUSTOM_NAME)) {
             return convertCustom(value);
         }
         return convertFromAvailableLanguages(value);
@@ -31,7 +31,7 @@ public class LanguageConverter extends BaseConverter<Language> {
     }
 
     private Language convertFromAvailableLanguages(String value) {
-        return Constants.AVAILABLE_LANGUAGES.stream()
+        return Language.AVAILABLE_LANGUAGES.stream()
             .filter(language -> value.equalsIgnoreCase(language.getName()))
             .findAny()
             .orElseThrow(() -> new ParameterException("No language found with name " + value));

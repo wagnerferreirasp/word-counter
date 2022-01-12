@@ -1,14 +1,14 @@
 package org.example.wordcounter.app.cli.options;
 
+import java.io.File;
+
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PathOptionTests extends OptionsBaseTests {
+public class InputPathOptionTests extends OptionsBaseTests {
 
 	@Test
 	void notPassingPath_ShouldThrowException() {

@@ -1,11 +1,11 @@
 package org.example.wordcounter.app.cli.options;
 
-import org.junit.jupiter.api.Test;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import static org.example.wordcounter.app.cli.options.Constants.ENCODING_OPTION;
+import org.junit.jupiter.api.Test;
+
+import static org.example.wordcounter.app.cli.options.Options.Names.ENCODING_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EncodingTests extends OptionsBaseTests {
@@ -42,4 +42,5 @@ class EncodingTests extends OptionsBaseTests {
 
 		assertEquals(Charset.forName("cp1250"), options.getEncoding());
 	}
+
 }

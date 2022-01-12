@@ -1,15 +1,13 @@
 package org.example.wordcounter.app.cli.options;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
 import org.example.wordcounter.app.files.FileTestUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static org.example.wordcounter.app.cli.options.Constants.OUTPUT_PATH_OPTION;
-import static org.example.wordcounter.app.cli.options.Constants.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.Names.OUTPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OptionsBaseTests {
