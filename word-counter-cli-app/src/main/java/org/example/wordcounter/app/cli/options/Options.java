@@ -72,8 +72,9 @@ public class Options {
     }
 
     private static final class Descriptions {
-        public static final String HELP = "Help Command - shows the options";
-        public static final String INPUT_PATH = "Input Path - file or directory to count the words";
+        public static final String HELP = "Shows Help - shows how to use the application with its options";
+        public static final String INPUT_PATH = "Input Path - file or directory to count the words. "
+            + "In case of a directory, it will consider all files recursively";
         public static final String ENCODING = "Encoding - encoding to consider when reading files from " + Names.INPUT_PATH_OPTION;
         public static final String OUTPUT_PATH = "Output file path - the csv location to the results";
         public static final String GROUP_SIZE = "Group size - number of words to group and count together";
