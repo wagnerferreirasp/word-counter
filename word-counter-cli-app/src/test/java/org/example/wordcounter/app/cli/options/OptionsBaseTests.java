@@ -6,8 +6,8 @@ import java.util.List;
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
 import org.example.wordcounter.app.files.FileTestUtils;
 
-import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.OUTPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.OUTPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OptionsBaseTests {

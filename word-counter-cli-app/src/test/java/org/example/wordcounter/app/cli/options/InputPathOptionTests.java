@@ -5,7 +5,7 @@ import java.io.File;
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.junit.jupiter.api.Test;
 
-import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputPathOptionTests extends OptionsBaseTests {

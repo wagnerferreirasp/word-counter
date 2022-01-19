@@ -56,7 +56,7 @@ class HelpFormatter {
 
 	private String formatMultilineDescription(ParameterDescription param) {
 		String description = param.getDescription();
-		if (param.getNames().contains(Options.Names.LANGUAGE_OPTION)) {
+		if (param.getNames().contains(Options.LANGUAGE_OPTION)) {
 			description = String.format(description, formatAvailableLanguages());
 		}
 		return String.join("\n\t\t", description.split("\n"));

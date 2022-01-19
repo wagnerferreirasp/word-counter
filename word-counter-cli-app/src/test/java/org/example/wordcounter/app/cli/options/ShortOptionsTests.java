@@ -9,12 +9,12 @@ import java.util.function.Function;
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.junit.jupiter.api.Test;
 
-import static org.example.wordcounter.app.cli.options.Options.Names.ENCODING_SHORT_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.GROUP_SIZE_SHORT_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.HELP_SHORT_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_SHORT_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.LANGUAGE_SHORT_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.OUTPUT_PATH_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.ENCODING_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.GROUP_SIZE_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.HELP_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.LANGUAGE_SHORT_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.OUTPUT_PATH_SHORT_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShortOptionsTests extends OptionsBaseTests {

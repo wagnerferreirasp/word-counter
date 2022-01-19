@@ -11,12 +11,12 @@ public class JCommanderOptionsParser implements OptionsParser {
 
 	private static final String APP_NAME = "word-counter-cli-app";
 
-	private final Options options;
+	private final JCommanderParameters jCommanderParameters;
 	private final JCommander jCommander = JCommander.newBuilder().build();
 
 	public JCommanderOptionsParser() {
-		this.options = new Options();
-		jCommander.addObject(options);
+		this.jCommanderParameters = new JCommanderParameters();
+		jCommander.addObject(jCommanderParameters);
 		jCommander.setProgramName(APP_NAME);
 		if (jCommander.getDescriptions() == null) {
 			jCommander.createDescriptions();
@@ -27,7 +27,7 @@ public class JCommanderOptionsParser implements OptionsParser {
 	public Options parse(String[] args) {
 		try {
 			jCommander.parse(args);
-			return options;
+			return jCommanderParameters.toOptions();
 		} catch (ParameterException e) {
 			throw new InvalidOptionException(e);
 		}

@@ -2,7 +2,7 @@ package org.example.wordcounter.app.cli.options;
 
 import org.junit.jupiter.api.Test;
 
-import static org.example.wordcounter.app.cli.options.Options.Names.GROUP_SIZE_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.GROUP_SIZE_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GroupSizeTests extends OptionsBaseTests {

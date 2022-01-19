@@ -10,11 +10,11 @@ import org.example.wordcounter.app.files.FileTestUtils;
 import org.example.wordcounter.core.text.Text;
 import org.junit.jupiter.api.Test;
 
-import static org.example.wordcounter.app.cli.options.Options.Names.GROUP_SIZE_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.HELP_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.INPUT_PATH_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.LANGUAGE_OPTION;
-import static org.example.wordcounter.app.cli.options.Options.Names.OUTPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.GROUP_SIZE_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.HELP_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.LANGUAGE_OPTION;
+import static org.example.wordcounter.app.cli.options.Options.OUTPUT_PATH_OPTION;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;

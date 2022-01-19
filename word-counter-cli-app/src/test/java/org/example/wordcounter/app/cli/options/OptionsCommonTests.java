@@ -2,6 +2,8 @@ package org.example.wordcounter.app.cli.options;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OptionsCommonTests extends OptionsBaseTests {
