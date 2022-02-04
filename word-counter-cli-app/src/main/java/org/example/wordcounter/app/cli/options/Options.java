@@ -1,6 +1,5 @@
 package org.example.wordcounter.app.cli.options;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.File;
@@ -10,15 +9,47 @@ import java.nio.charset.Charset;
  * Represents the options passed via cli to run the application
  */
 @Getter
-@AllArgsConstructor
 public class Options {
 
-    private final boolean help;
     private final File inputPath;
     private final File outputPath;
     private final Integer groupSize;
     private final Language language;
     private final Charset encoding;
+
+    public Options(File inputPath, File outputPath, Integer groupSize, String language, String encoding) {
+        validateInputPath(inputPath);
+        validateGroupSize(groupSize);
+        this.language = validateLanguage(language);
+        this.encoding = validateEncoding(encoding);
+        this.inputPath = inputPath;
+        this.outputPath = outputPath;
+        this.groupSize = groupSize;
+    }
+
+    private Charset validateEncoding(String encoding) {
+        try {
+            return Charset.forName(encoding);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unrecognized encoding " + encoding);
+        }
+    }
+
+    private Language validateLanguage(String language) {
+        return new LanguageConverter().convert(language);
+    }
+
+    private void validateGroupSize(Integer groupSize) {
+        if (groupSize < 1) {
+            throw new IllegalArgumentException("The group size must not be lower than 1");
+        }
+    }
+
+    private void validateInputPath(File inputPath) {
+        if (!inputPath.exists()) {
+            throw new IllegalArgumentException("The input path does not exist");
+        }
+    }
 
     public static final String INPUT_PATH_OPTION = "--input-path";
     public static final String INPUT_PATH_SHORT_OPTION = "-i";

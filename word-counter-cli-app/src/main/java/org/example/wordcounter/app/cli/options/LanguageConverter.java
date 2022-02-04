@@ -1,18 +1,11 @@
 package org.example.wordcounter.app.cli.options.impl;
 
-import com.beust.jcommander.ParameterException;
-import com.beust.jcommander.converters.BaseConverter;
-
 import org.example.wordcounter.app.cli.options.Language;
 
 import java.util.Base64;
 
-public class LanguageConverter extends BaseConverter<Language> {
-    public LanguageConverter(String optionName) {
-        super(optionName);
-    }
+public class LanguageConverter {
 
-    @Override
     public Language convert(String value) {
         if (value.toUpperCase().startsWith(Language.CUSTOM_NAME)) {
             return convertCustom(value);
@@ -23,7 +16,7 @@ public class LanguageConverter extends BaseConverter<Language> {
     private Language convertCustom(String value) {
         String[] valueArray = value.split(":");
         if (valueArray.length < 2) {
-            throw new ParameterException("Option " + getOptionName() + " invalid. The alphabet should be " +
+            throw new IllegalArgumentException("The alphabet should be " +
                 "passed to the custom language");
         }
         byte[] alphabetBytes = Base64.getDecoder().decode(valueArray[1]);
@@ -34,6 +27,6 @@ public class LanguageConverter extends BaseConverter<Language> {
         return Language.AVAILABLE_LANGUAGES.stream()
             .filter(language -> value.equalsIgnoreCase(language.getShortName()))
             .findAny()
-            .orElseThrow(() -> new ParameterException("No language found with name " + value));
+            .orElseThrow(() -> new IllegalArgumentException("No language found with name " + value));
     }
 }
