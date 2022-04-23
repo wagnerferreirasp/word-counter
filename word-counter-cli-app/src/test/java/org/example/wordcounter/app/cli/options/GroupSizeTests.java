@@ -11,7 +11,7 @@ public class GroupSizeTests extends OptionsBaseTests {
     void groupSizeNotPassed_ShouldDefaultToOne() {
         String[] args = givenOptionsNotPassing(GROUP_SIZE_OPTION);
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
         assertEquals(1, options.getGroupSize());
     }
 
@@ -40,7 +40,7 @@ public class GroupSizeTests extends OptionsBaseTests {
     void groupSize2_ShouldParseCorrectly() {
         String[] args = givenValidOptionsWith(GROUP_SIZE_OPTION, "2");
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
         assertEquals(2, options.getGroupSize());
     }
 }

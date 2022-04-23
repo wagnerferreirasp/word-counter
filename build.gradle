@@ -3,4 +3,4 @@ plugins {
 }
 
 sourceCompatibility = '11'
-targetCompatibility = '8'
+targetCompatibility = '11'

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.example.wordcounter.app.cli.options.FormattedHelp;
 import org.example.wordcounter.app.cli.options.Language;
 import org.example.wordcounter.app.cli.options.Options;
 
@@ -20,28 +21,31 @@ class HelpFormatter {
 		this.appName = appName;
 	}
 
-	public String getHelp() {
+	public FormattedHelp getHelp() {
 		List<ParameterDescription> params = new ArrayList<>(jCommander.getFields().values());
-		return
-			"\nUsage: java -jar " + appName + "-{version}.jar [options]" +
-				"\n\tRequired options:" +
-				formatRequiredOptions(params) +
-				"\n\n\tNon-required options:" +
-				formatNonRequiredOptions(params);
+		return new FormattedHelp(
+			formatUsage(),
+			formatRequiredOptions(params),
+			formatNonRequiredOptions(params)
+		);
 	}
 
-	private String formatRequiredOptions(List<ParameterDescription> params) {
+	private String formatUsage() {
+		return "\nUsage: java -jar " + appName + "-{version}.jar [options]";
+	}
+
+	private List<String> formatRequiredOptions(List<ParameterDescription> params) {
 		return params.stream()
 			.filter(param -> param.getParameter().getParameter().required())
 			.map(this::formatOption)
-			.collect(Collectors.joining("\n"));
+			.collect(Collectors.toList());
 	}
 
-	private String formatNonRequiredOptions(List<ParameterDescription> params) {
+	private List<String> formatNonRequiredOptions(List<ParameterDescription> params) {
 		return params.stream()
 			.filter(param -> !param.getParameter().getParameter().required())
 			.map(param -> formatOption(param) + formatDefault(param))
-			.collect(Collectors.joining("\n"));
+			.collect(Collectors.toList());
 	}
 
 	private String formatOption(ParameterDescription param) {

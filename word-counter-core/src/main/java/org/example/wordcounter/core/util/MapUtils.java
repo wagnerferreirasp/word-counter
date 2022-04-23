@@ -8,7 +8,12 @@ import java.util.Map;
 /**
  * Utility functions for maps
  */
-public class MapUtils {
+public final class MapUtils {
+
+    private MapUtils() {
+        // Utility class
+    }
+
     public static LinkedHashMap<String, Integer> sortedMapByValue(Map<String, Integer> map) {
         LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
         map.entrySet()

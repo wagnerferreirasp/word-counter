@@ -30,7 +30,7 @@ public class InputPathOptionTests extends OptionsBaseTests {
 		String fullPath = FileTestUtils.getFullPath("texts/utf8/simple.txt");
 		String[] args = givenValidOptionsWith(INPUT_PATH_OPTION, fullPath);
 
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(new File(fullPath), options.getInputPath());
 	}
@@ -40,7 +40,7 @@ public class InputPathOptionTests extends OptionsBaseTests {
 		String fullPath = FileTestUtils.getFullPath("texts/");
 		String[] args = givenValidOptionsWith(INPUT_PATH_OPTION, fullPath);
 
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(new File(fullPath), options.getInputPath());
 	}

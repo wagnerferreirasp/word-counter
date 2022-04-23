@@ -12,13 +12,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            execute(args);
+            new Main().execute(args);
         } catch (ConfigurationException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private static void execute(String[] args) {
+    public void execute(String[] args) {
         ApplicationConfig config = new ApplicationConfig(args);
         Options options = config.getOptions();
         WordRankingService rankingService = config.getRankingService();

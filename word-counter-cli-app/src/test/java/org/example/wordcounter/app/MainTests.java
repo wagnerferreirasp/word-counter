@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.example.wordcounter.app.files.FileTestUtils;
 import org.example.wordcounter.core.text.Text;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.example.wordcounter.app.cli.options.Options.GROUP_SIZE_OPTION;
@@ -15,6 +16,8 @@ import static org.example.wordcounter.app.cli.options.Options.HELP_OPTION;
 import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_OPTION;
 import static org.example.wordcounter.app.cli.options.Options.LANGUAGE_OPTION;
 import static org.example.wordcounter.app.cli.options.Options.OUTPUT_PATH_OPTION;
+import static org.example.wordcounter.app.files.FileTestUtils.getFile;
+import static org.example.wordcounter.app.files.FileTestUtils.getFullPath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +28,12 @@ class MainTests {
 	private static final String CONTENT_OF_COMPLEX_TXT = "complexcontent,4\nsimplecontent,1";
 	private static final String OUTPUT_CSV = "output.csv";
 	public static final String INPUT_FOLDER = "texts/utf8";
+
+	@BeforeEach
+	void setUp() {
+		File file = getFile(OUTPUT_CSV);
+		file.deleteOnExit();
+	}
 
 	@Test
 	void noParams_shouldShowInvalidParameterMessage() {
@@ -78,16 +87,10 @@ class MainTests {
 
 		Text text = FileTestUtils.getText(OUTPUT_CSV, StandardCharsets.UTF_8);
 		assertEquals(CONTENT_OF_COMPLEX_TXT, text.getContent());
-		cleanupOutputFile();
-	}
-
-	private void cleanupOutputFile() {
-		File file = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
-		file.deleteOnExit();
 	}
 
 	private File givenOutputNotWritable() throws IOException {
-		File outputFile = new File(FileTestUtils.getFullPath(OUTPUT_CSV));
+		File outputFile = getFile(OUTPUT_CSV);
 		if (!outputFile.exists()) {
 			boolean fileCreated = outputFile.createNewFile();
 			assertTrue(fileCreated);
@@ -107,8 +110,8 @@ class MainTests {
 		return new String[]{
 			GROUP_SIZE_OPTION, "1",
 			LANGUAGE_OPTION, "en",
-            INPUT_PATH_OPTION, FileTestUtils.getFullPath(INPUT_FOLDER),
-			OUTPUT_PATH_OPTION, FileTestUtils.getFullPath(OUTPUT_CSV)
+            INPUT_PATH_OPTION, getFullPath(INPUT_FOLDER),
+			OUTPUT_PATH_OPTION, getFullPath(OUTPUT_CSV)
 		};
 	}
 

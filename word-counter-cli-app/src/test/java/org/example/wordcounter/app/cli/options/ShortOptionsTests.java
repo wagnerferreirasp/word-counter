@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.example.wordcounter.app.files.FileTestUtils;
@@ -16,6 +17,7 @@ import static org.example.wordcounter.app.cli.options.Options.INPUT_PATH_SHORT_O
 import static org.example.wordcounter.app.cli.options.Options.LANGUAGE_SHORT_OPTION;
 import static org.example.wordcounter.app.cli.options.Options.OUTPUT_PATH_SHORT_OPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShortOptionsTests extends OptionsBaseTests {
 
@@ -53,9 +55,8 @@ public class ShortOptionsTests extends OptionsBaseTests {
 
 	@Test
 	void testHelp() {
-		testShortOptionParse(new String[]{HELP_SHORT_OPTION},
-			true, Options::isHelp
-		);
+		Optional<Options> optionalOptions = optionsParser.parse(new String[] { HELP_SHORT_OPTION });
+		assertTrue(optionalOptions.isEmpty());
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class ShortOptionsTests extends OptionsBaseTests {
 	}
 
 	private <T> void testShortOptionParse(String[] args, T expectedValue, Function<Options, T> optionGetter) {
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 		assertEquals(optionGetter.apply(options), expectedValue);
 	}
 

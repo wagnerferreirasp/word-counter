@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 
+import static org.example.wordcounter.app.files.FileTestUtils.getFile;
 import static org.example.wordcounter.app.files.FileTestUtils.getFullPath;
 import static org.example.wordcounter.app.files.FileTestUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -69,7 +70,7 @@ public class FileTextTests {
 		String folderName = "texts/utf8";
 
 		assertThrows(IllegalArgumentException.class, () ->
-			new FileText(new File(getFullPath(folderName)), StandardCharsets.UTF_8));
+			new FileText(getFile(folderName), StandardCharsets.UTF_8));
 	}
 
 	public Text givenSimpleTextFile() {

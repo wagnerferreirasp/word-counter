@@ -1,9 +1,9 @@
 package org.example.wordcounter.app.cli.options;
 
-import lombok.Getter;
-
 import java.io.File;
 import java.nio.charset.Charset;
+
+import lombok.Getter;
 
 /**
  * Represents the options passed via cli to run the application
@@ -31,7 +31,7 @@ public class Options {
         try {
             return Charset.forName(encoding);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Unrecognized encoding " + encoding);
+            throw new InvalidOptionException("Unrecognized encoding " + encoding);
         }
     }
 
@@ -41,13 +41,13 @@ public class Options {
 
     private void validateGroupSize(Integer groupSize) {
         if (groupSize < 1) {
-            throw new IllegalArgumentException("The group size must not be lower than 1");
+            throw new InvalidOptionException("The group size must not be lower than 1");
         }
     }
 
     private void validateInputPath(File inputPath) {
         if (!inputPath.exists()) {
-            throw new IllegalArgumentException("The input path does not exist");
+            throw new InvalidOptionException("The input path does not exist");
         }
     }
 
