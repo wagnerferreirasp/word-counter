@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 /**
  * Utility class to write the ranking of words to a csv file
  */
-public class CsvWriter {
+public final class CsvWriter {
+
+    private CsvWriter() {
+        // Utility class
+    }
 
     /**
      * Writes the ranking to the outputPath

@@ -3,6 +3,7 @@ target/
 .gradle/
 build/
 *.iml
+out/
 
 # Compiled class file
 *.class

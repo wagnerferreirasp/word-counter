@@ -1,11 +1,13 @@
 package org.example.wordcounter.app.cli.options.impl;
 
-import com.beust.jcommander.Parameter;
+import java.io.File;
+import java.util.Optional;
+
 import org.example.wordcounter.app.cli.options.Options;
 
-import java.io.File;
+import com.beust.jcommander.Parameter;
 
-public class JCommanderParameters {
+public class JCommanderOptions {
 
     @Parameter(description = Options.HELP_DESCRIPTION,
         names = { Options.HELP_OPTION, Options.HELP_SHORT_OPTION },
@@ -40,15 +42,17 @@ public class JCommanderParameters {
     )
     private String encoding = "UTF-8";
 
-    Options toOptions() {
-        return new Options(
-            help,
+    Optional<Options> toOptions() {
+        if (help) {
+            return Optional.empty();
+        }
+        return Optional.of(new Options(
             inputPath,
             outputPath,
             groupSize,
             language,
             encoding
-        );
+        ));
     }
 
 }

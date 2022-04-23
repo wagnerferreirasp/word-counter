@@ -13,8 +13,12 @@ public class FileTestUtils {
 	}
 
 	public static Text getText(String fileName, Charset encoding) {
-		File file = new File(getFullPath(fileName));
+		File file = getFile(fileName);
 		return new FileText(file, encoding);
+	}
+
+	public static File getFile(String fileName) {
+		return new File(getFullPath(fileName));
 	}
 
 }

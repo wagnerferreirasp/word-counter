@@ -13,7 +13,7 @@ class EncodingTests extends OptionsBaseTests {
 	@Test
 	void dontPassEncoding_UTF8ShouldBeUsed() {
 		String[] args = givenOptionsNotPassing(ENCODING_OPTION);
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(StandardCharsets.UTF_8, options.getEncoding());
 	}
@@ -29,7 +29,7 @@ class EncodingTests extends OptionsBaseTests {
 	void passUTF16_ShouldParseCorrectly() {
 		String[] args = givenValidOptionsWith(ENCODING_OPTION, "utf-16");
 
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(StandardCharsets.UTF_16, options.getEncoding());
 	}
@@ -38,7 +38,7 @@ class EncodingTests extends OptionsBaseTests {
 	void passCp1250_ShouldParseCorrectly() {
 		String[] args = givenValidOptionsWith(ENCODING_OPTION, "cp1250");
 
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(Charset.forName("cp1250"), options.getEncoding());
 	}

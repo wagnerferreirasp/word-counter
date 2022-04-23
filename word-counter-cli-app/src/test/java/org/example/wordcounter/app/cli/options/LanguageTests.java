@@ -11,7 +11,7 @@ public class LanguageTests extends OptionsBaseTests {
     void languageNotPassed_ShouldDefaultToEnglish() {
         String[] args = givenOptionsNotPassing(LANGUAGE_OPTION);
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
         assertEquals("EN", options.getLanguage().getShortName().toUpperCase());
         assertEquals("ENGLISH", options.getLanguage().getLongName().toUpperCase());
     }
@@ -36,7 +36,7 @@ public class LanguageTests extends OptionsBaseTests {
             String.format("CUSTOM:%s", BASE64_ALPHABET_VALID_VALUE)
         );
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
 
         assertEquals(ALPHABET_VALID_VALUE, options.getLanguage().getAlphabetRegex());
     }
@@ -45,7 +45,7 @@ public class LanguageTests extends OptionsBaseTests {
     void czechShouldBeAvailable() {
         String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"CZ");
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
 
         assertEquals("CZ", options.getLanguage().getShortName().toUpperCase());
     }
@@ -54,7 +54,7 @@ public class LanguageTests extends OptionsBaseTests {
     void spanishShouldBeAvailable() {
         String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"ES");
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
 
         assertEquals("ES", options.getLanguage().getShortName().toUpperCase());
     }
@@ -63,7 +63,7 @@ public class LanguageTests extends OptionsBaseTests {
     void portugueseShouldBeAvailable() {
         String[] args = givenValidOptionsWith(LANGUAGE_OPTION,"PT");
 
-        Options options = optionsParser.parse(args);
+        Options options = optionsParser.parse(args).orElseThrow();
 
         assertEquals("PT", options.getLanguage().getShortName().toUpperCase());
     }

@@ -1,6 +1,11 @@
 plugins {
 	id 'java'
 	id "io.freefair.lombok" version "6.3.0"
+	id 'info.solidsoft.pitest' version '1.7.4'
+}
+
+pitest {
+	junit5PluginVersion = '0.15'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -17,6 +22,7 @@ dependencies {
 	implementation project(':word-counter-core')
 
 	testImplementation 'org.hamcrest:hamcrest-all:1.3'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
 	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
 	jar {

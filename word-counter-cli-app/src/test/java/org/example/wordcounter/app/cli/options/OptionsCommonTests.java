@@ -2,8 +2,6 @@ package org.example.wordcounter.app.cli.options;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.charset.StandardCharsets;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OptionsCommonTests extends OptionsBaseTests {
@@ -25,7 +23,7 @@ public class OptionsCommonTests extends OptionsBaseTests {
 	void passValidRequiredOptions_ShouldParseCorrectly() {
 		String[] args = getValidRequiredArgs().toArray(String[]::new);
 
-		Options options = optionsParser.parse(args);
+		Options options = optionsParser.parse(args).orElseThrow();
 
 		assertEquals(INPUT_PATH_VALID_VALUE, options.getInputPath().getName());
 		assertEquals(OUTPUT_PATH_VALID_VALUE, options.getOutputPath().getName());

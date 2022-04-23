@@ -1,18 +1,17 @@
 package org.example.wordcounter.app.files;
 
-import lombok.SneakyThrows;
-import org.example.wordcounter.core.text.Text;
-import org.example.wordcounter.core.text.TextProvider;
-
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.example.wordcounter.core.text.Text;
+import org.example.wordcounter.core.text.TextProvider;
+
+import lombok.SneakyThrows;
 
 /**
  * Provides the Texts via Files

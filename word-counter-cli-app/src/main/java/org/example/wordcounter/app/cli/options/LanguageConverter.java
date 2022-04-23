@@ -1,6 +1,4 @@
-package org.example.wordcounter.app.cli.options.impl;
-
-import org.example.wordcounter.app.cli.options.Language;
+package org.example.wordcounter.app.cli.options;
 
 import java.util.Base64;
 
@@ -16,7 +14,7 @@ public class LanguageConverter {
     private Language convertCustom(String value) {
         String[] valueArray = value.split(":");
         if (valueArray.length < 2) {
-            throw new IllegalArgumentException("The alphabet should be " +
+            throw new InvalidOptionException("The alphabet should be " +
                 "passed to the custom language");
         }
         byte[] alphabetBytes = Base64.getDecoder().decode(valueArray[1]);
@@ -27,6 +25,6 @@ public class LanguageConverter {
         return Language.AVAILABLE_LANGUAGES.stream()
             .filter(language -> value.equalsIgnoreCase(language.getShortName()))
             .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("No language found with name " + value));
+            .orElseThrow(() -> new InvalidOptionException("No language found with name " + value));
     }
 }

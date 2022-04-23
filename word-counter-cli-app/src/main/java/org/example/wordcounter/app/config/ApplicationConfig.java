@@ -17,14 +17,12 @@ public class ApplicationConfig {
 	public ApplicationConfig(String[] args) {
 		OptionsParser optionsParser = getOptionsParser();
 		try {
-			this.options = optionsParser.parse(args);
-			if (options.isHelp()) {
-				throw new ConfigurationException(optionsParser.getHelp());
-			}
+			this.options = optionsParser.parse(args)
+				.orElseThrow(() -> new ConfigurationException(optionsParser.getHelp().format()));
 		} catch (InvalidOptionException e) {
 			String message = String.format("%s\n%s",
 				e.getCause().getMessage(),
-				optionsParser.getHelp()
+				optionsParser.getHelp().format()
 			);
 			throw new ConfigurationException(message);
 		}
