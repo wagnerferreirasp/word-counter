@@ -12,7 +12,7 @@ public class FormattedHelp {
 	private List<String> requiredOptions;
 	private List<String> nonRequiredOptions;
 
-	public String getFullText() {
+	public String format() {
 		return usage +
 		"\n\tRequired options:" +
 			String.join("\n", requiredOptions) +

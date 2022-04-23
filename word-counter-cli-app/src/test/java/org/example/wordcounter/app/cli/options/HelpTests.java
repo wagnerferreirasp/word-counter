@@ -4,10 +4,19 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HelpTests extends OptionsBaseTests {
+
+	@Test
+	void helpUsageShouldContainAppName() {
+		FormattedHelp help = optionsParser.getHelp();
+
+		assertThat(help.getUsage(), containsString("word-counter-cli-app"));
+	}
 
 	@Test
 	void helpShouldContainRequiredOptions() {

@@ -24,24 +24,24 @@ class HelpFormatter {
 	public FormattedHelp getHelp() {
 		List<ParameterDescription> params = new ArrayList<>(jCommander.getFields().values());
 		return new FormattedHelp(
-			formatUsage(),
-			formatRequiredOptions(params),
-			formatNonRequiredOptions(params)
+			createUsage(),
+			createRequiredOptions(params),
+			createNonRequiredOptions(params)
 		);
 	}
 
-	private String formatUsage() {
+	private String createUsage() {
 		return "\nUsage: java -jar " + appName + "-{version}.jar [options]";
 	}
 
-	private List<String> formatRequiredOptions(List<ParameterDescription> params) {
+	private List<String> createRequiredOptions(List<ParameterDescription> params) {
 		return params.stream()
 			.filter(param -> param.getParameter().getParameter().required())
 			.map(this::formatOption)
 			.collect(Collectors.toList());
 	}
 
-	private List<String> formatNonRequiredOptions(List<ParameterDescription> params) {
+	private List<String> createNonRequiredOptions(List<ParameterDescription> params) {
 		return params.stream()
 			.filter(param -> !param.getParameter().getParameter().required())
 			.map(param -> formatOption(param) + formatDefault(param))

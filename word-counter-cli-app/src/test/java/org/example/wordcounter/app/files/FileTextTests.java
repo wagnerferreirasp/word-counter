@@ -1,15 +1,13 @@
 package org.example.wordcounter.app.files;
 
-import org.example.wordcounter.core.text.Text;
-import org.junit.jupiter.api.Test;
-
-import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 
+import org.example.wordcounter.core.text.Text;
+import org.junit.jupiter.api.Test;
+
 import static org.example.wordcounter.app.files.FileTestUtils.getFile;
-import static org.example.wordcounter.app.files.FileTestUtils.getFullPath;
 import static org.example.wordcounter.app.files.FileTestUtils.getText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

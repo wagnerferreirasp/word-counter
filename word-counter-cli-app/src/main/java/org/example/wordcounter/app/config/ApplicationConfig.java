@@ -18,11 +18,11 @@ public class ApplicationConfig {
 		OptionsParser optionsParser = getOptionsParser();
 		try {
 			this.options = optionsParser.parse(args)
-				.orElseThrow(() -> new ConfigurationException(optionsParser.getHelp().getFullText()));
+				.orElseThrow(() -> new ConfigurationException(optionsParser.getHelp().format()));
 		} catch (InvalidOptionException e) {
 			String message = String.format("%s\n%s",
 				e.getCause().getMessage(),
-				optionsParser.getHelp().getFullText()
+				optionsParser.getHelp().format()
 			);
 			throw new ConfigurationException(message);
 		}
