@@ -6,4 +6,4 @@ orbs:
 workflows:
   test-workflow:
     jobs:
-      - gradle/run
+      - gradle/test
