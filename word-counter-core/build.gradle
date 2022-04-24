@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'info.solidsoft.pitest' version '1.7.4'
+	id 'jacoco'
 }
 
 pitest {
@@ -24,4 +25,5 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport // report is always generated after tests run
 }

@@ -21,9 +21,7 @@ public class JCommanderOptionsParser implements OptionsParser {
 		this.jCommanderOptions = new JCommanderOptions();
 		jCommander.addObject(jCommanderOptions);
 		jCommander.setProgramName(APP_NAME);
-		if (jCommander.getDescriptions() == null) {
-			jCommander.createDescriptions();
-		}
+		jCommander.createDescriptions();
 	}
 
 	@Override

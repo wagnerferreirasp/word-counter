@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id "io.freefair.lombok" version "6.3.0"
 	id 'info.solidsoft.pitest' version '1.7.4'
+	id 'jacoco'
 }
 
 pitest {
@@ -41,4 +42,6 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport // report is always generated after tests run
 }
+
