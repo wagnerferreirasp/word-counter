@@ -5,6 +5,7 @@ import org.example.wordcounter.app.cli.options.InvalidOptionException;
 import org.example.wordcounter.app.cli.options.Options;
 import org.example.wordcounter.app.cli.options.OptionsParser;
 import org.example.wordcounter.app.cli.options.impl.JCommanderOptionsParser;
+import org.example.wordcounter.app.files.CsvWriter;
 import org.example.wordcounter.app.files.FileTextProvider;
 import org.example.wordcounter.core.counter.WordRankingService;
 import org.example.wordcounter.core.text.TextProvider;
@@ -39,4 +40,9 @@ public class ApplicationConfig {
 	public WordRankingService getRankingService() {
 		return new WordRankingService(options.getLanguage().getAlphabetRegex(), getTextProvider());
 	}
+
+	public CsvWriter getCsvWriter() {
+		return new CsvWriter();
+	}
+
 }

@@ -12,18 +12,15 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            new Main().execute(args);
+            ApplicationConfig config = new ApplicationConfig(args);
+            Options options = config.getOptions();
+            CsvWriter csvWriter = config.getCsvWriter();
+            WordRankingService rankingService = config.getRankingService();
+            LinkedHashMap<String, Integer> result = rankingService.rankWordsFromTexts(options.getGroupSize());
+            csvWriter.writeRankingToCsv(result, options.getOutputPath(), options.getEncoding());
         } catch (ConfigurationException e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    public void execute(String[] args) {
-        ApplicationConfig config = new ApplicationConfig(args);
-        Options options = config.getOptions();
-        WordRankingService rankingService = config.getRankingService();
-        LinkedHashMap<String, Integer> result = rankingService.rankWordsFromTexts(options.getGroupSize());
-        CsvWriter.writeRankingToCsv(result, options.getOutputPath(), options.getEncoding());
     }
 
 }

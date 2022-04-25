@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 public class FileText implements Text {
 	private final File file;
 	private final Charset encoding;
-	private String content;
 
 	public FileText(File path, Charset encoding) {
 		if (path.isDirectory()) {

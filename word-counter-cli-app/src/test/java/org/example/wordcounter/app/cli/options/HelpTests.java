@@ -19,6 +19,26 @@ public class HelpTests extends OptionsBaseTests {
 	}
 
 	@Test
+	void helpShouldContainAvailableLanguages() {
+		FormattedHelp help = optionsParser.getHelp();
+
+		assertThat(help.format(), containsString(Language.CZ.getShortName()));
+		assertThat(help.format(), containsString(Language.CZ.getLongName()));
+		assertThat(help.format(), containsString(Language.PT.getShortName()));
+		assertThat(help.format(), containsString(Language.PT.getLongName()));
+		assertThat(help.format(), containsString(Language.EN.getShortName()));
+		assertThat(help.format(), containsString(Language.EN.getLongName()));
+	}
+
+	@Test
+	void helpShouldShowDefaultValues() {
+		FormattedHelp help = optionsParser.getHelp();
+		assertContainsDefault(help, Options.ENCODING_OPTION, "UTF-8");
+		assertContainsDefault(help, Options.GROUP_SIZE_OPTION, "1");
+		assertContainsDefault(help, Options.LANGUAGE_OPTION, "EN");
+	}
+
+	@Test
 	void helpShouldContainRequiredOptions() {
 		FormattedHelp help = optionsParser.getHelp();
 
@@ -47,6 +67,12 @@ public class HelpTests extends OptionsBaseTests {
 	private void assertContainsOption(List<String> options, String option) {
 		assertTrue(options.stream()
 			.anyMatch(output -> output.contains(option)));
+	}
+
+	private void assertContainsDefault(FormattedHelp help, String option, String defaultValue) {
+		assertTrue(help.getNonRequiredOptions().stream()
+			.filter(opt -> opt.contains(option))
+			.anyMatch(opt -> opt.contains(defaultValue)));
 	}
 
 }

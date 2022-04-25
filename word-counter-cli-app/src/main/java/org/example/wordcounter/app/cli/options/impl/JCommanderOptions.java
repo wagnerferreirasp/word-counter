@@ -13,7 +13,7 @@ public class JCommanderOptions {
         names = { Options.HELP_OPTION, Options.HELP_SHORT_OPTION },
         help = true
     )
-    private boolean help;
+    private boolean isHelp;
 
     @Parameter(description = Options.INPUT_PATH_DESCRIPTION,
         names = { Options.INPUT_PATH_OPTION, Options.INPUT_PATH_SHORT_OPTION },
@@ -43,16 +43,9 @@ public class JCommanderOptions {
     private String encoding = "UTF-8";
 
     Optional<Options> toOptions() {
-        if (help) {
-            return Optional.empty();
-        }
-        return Optional.of(new Options(
-            inputPath,
-            outputPath,
-            groupSize,
-            language,
-            encoding
-        ));
+        return isHelp
+            ? Optional.empty()
+            : Optional.of(new Options(inputPath, outputPath, groupSize, language, encoding));
     }
 
 }

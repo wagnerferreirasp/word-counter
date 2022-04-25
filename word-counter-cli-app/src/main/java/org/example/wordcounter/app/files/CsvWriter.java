@@ -9,14 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Utility class to write the ranking of words to a csv file
- */
-public final class CsvWriter {
-
-    private CsvWriter() {
-        // Utility class
-    }
+public class CsvWriter {
 
     /**
      * Writes the ranking to the outputPath
@@ -24,14 +17,14 @@ public final class CsvWriter {
      * @param outputPath the output path to save the csv file
      * @param encoding the encoding to save the csv file
      */
-    public static void writeRankingToCsv(LinkedHashMap<String, Integer> ranking, File outputPath, Charset encoding) {
+    public void writeRankingToCsv(LinkedHashMap<String, Integer> ranking, File outputPath, Charset encoding) {
         String content = ranking.entrySet().stream()
-            .map(CsvWriter::toLine)
+            .map(this::toLine)
             .collect(Collectors.joining("\n"));
         writeToCsv(outputPath, encoding, content);
     }
 
-    private static String toLine(Map.Entry<String, Integer> rankingEntry) {
+    private String toLine(Map.Entry<String, Integer> rankingEntry) {
         String word = rankingEntry.getKey();
         Integer rank = rankingEntry.getValue();
         return String.format("%s,%d", word, rank);
