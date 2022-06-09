@@ -10,7 +10,7 @@ public class Language {
     public static final String CUSTOM_NAME = "CUSTOM";
     public static final Language CZ = Language.of("CZ", "Czech", "ěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮ\\p{Alpha}");
     public static final Language EN = Language.of("EN", "English", "-'éç\\p{Alpha}");
-    public static final Language ES = Language.of("ES", "Spanish", "-'áéíñóúüÁÉÍÑÓÚÜ\\p{Alpha}");
+    public static final Language ES = Language.of("ES", "Spanish", "'áéíñóúüÁÉÍÑÓÚÜ\\p{Alpha}");
     public static final Language PT = Language.of("PT", "Portuguese", "-'áéíóúàãõâêüçÁÉÍÓÚÀÃÕÂÊÜÇ\\p{Alpha}");
     public static final List<Language> AVAILABLE_LANGUAGES = List.of(EN, CZ, ES, PT);
 

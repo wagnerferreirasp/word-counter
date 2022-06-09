@@ -5,10 +5,13 @@ import java.util.Base64;
 public class LanguageConverter {
 
     public Language convert(String value) {
-        if (value.toUpperCase().startsWith(Language.CUSTOM_NAME)) {
-            return convertCustom(value);
-        }
-        return convertFromAvailableLanguages(value);
+        return isCustomLanguage(value)
+            ? convertCustom(value)
+            : convertFromAvailableLanguages(value);
+    }
+
+    private boolean isCustomLanguage(String value) {
+        return value.toUpperCase().startsWith(Language.CUSTOM_NAME);
     }
 
     private Language convertCustom(String value) {

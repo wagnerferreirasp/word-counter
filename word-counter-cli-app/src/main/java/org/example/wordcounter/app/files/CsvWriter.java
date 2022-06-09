@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class CsvWriter {
 
+    int MINIMUM_OCCURRENCES = 1;
+
     /**
      * Writes the ranking to the outputPath
      * @param ranking the map with the ranking of words
@@ -19,6 +21,7 @@ public class CsvWriter {
      */
     public void writeRankingToCsv(LinkedHashMap<String, Integer> ranking, File outputPath, Charset encoding) {
         String content = ranking.entrySet().stream()
+            .filter(entry -> entry.getValue() >= MINIMUM_OCCURRENCES)
             .map(this::toLine)
             .collect(Collectors.joining("\n"));
         writeToCsv(outputPath, encoding, content);

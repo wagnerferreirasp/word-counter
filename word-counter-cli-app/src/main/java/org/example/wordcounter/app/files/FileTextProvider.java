@@ -32,16 +32,15 @@ public class FileTextProvider implements TextProvider {
 
 	@Override
 	public List<Text> findAll() {
-		return findTextsFromPath(path)
+		return findTextsRecursively(path)
 			.collect(Collectors.toList());
 	}
 
-	private Stream<Text> findTextsFromPath(File path) {
-		if (!path.isDirectory()) {
-			return Stream.of(new FileText(path, encoding));
-		}
-		return Arrays.stream(path.listFiles())
-			.flatMap(this::findTextsFromPath);
+	private Stream<Text> findTextsRecursively(File path) {
+		return !path.isDirectory()
+			? Stream.of(new FileText(path, encoding))
+			: Arrays.stream(path.listFiles())
+				.flatMap(this::findTextsRecursively);
 	}
 
 }
