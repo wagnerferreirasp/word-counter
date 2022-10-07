@@ -27,17 +27,15 @@ public class WordRankingService {
      * @return the ranking of occurrences of words (or group of words)
      */
     public LinkedHashMap<String, Integer> rankWordsFromTexts(int groupSize) {
-        Map<String, Integer> totalCountMap = new HashMap<>();
-        for (Text text : textProvider.findAll()) {
-            Map<String, Integer> countMap = countWordsInTextWithLowerCase(text, groupSize);
-            totalCountMap = MapUtils.sumMaps(totalCountMap, countMap);
-        }
-        return MapUtils.sortedMapByValue(totalCountMap);
+        return MapUtils.sortedMapByValue(textProvider.findAll().stream()
+                .map(text -> countWordsInTextWithLowerCase(text, groupSize))
+                .reduce(new HashMap<>(), MapUtils::sumMaps)
+        );
     }
 
     private Map<String, Integer> countWordsInTextWithLowerCase(Text text, int groupSize) {
-        String textContent = text.getContent().toLowerCase();
-        return wordCounter.countGroupsOfWords(groupSize, textContent);
+        String textContentLower = text.getContent().toLowerCase();
+        return wordCounter.countGroupsOfWords(groupSize, textContentLower);
     }
 
 }
